@@ -1,0 +1,15 @@
+{
+    "configurations": [
+    {
+        "name": "(Windows) Launch",
+        "type": "cppvsdbg",
+        "request": "launch",
+        "program": "C:\Users\reddy\OneDrive\Desktop\DS\Linked List\singly_LL.exe",
+        "args": [],
+        "stopAtEntry": false,
+        "cwd": "${fileDirname}",
+        "environment": [],
+        "console": "externalTerminal"
+    }
+    ]
+}
