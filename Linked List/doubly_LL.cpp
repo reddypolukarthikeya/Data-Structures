@@ -41,6 +41,7 @@ class List {
         void Reverse();
 };
 
+//This function actually performs the reverse function.
 void List::Reverse() {
     if (head == NULL){
         cout << "The list is empty...!!!" << endl;
@@ -59,6 +60,7 @@ void List::Reverse() {
         head = temp->prev;
 }
 
+//Note:- This function does not reverse the linked instead it just prints in reverse order.
 void List::ReverseDispaly() {
     if (head == NULL) {
         cout << "The list is empty...!!!" << endl;
@@ -74,18 +76,19 @@ void List::ReverseDispaly() {
 }
 
 void List::DeleteAtPosition(int position) {
-    // Check if the given positon is valid or not
+    // Check if the given positon is valid or not.
     if (position > CountNodes()) {
         cout << "Invalid position" << endl;
         return;
     }
+    // Check if the list is empty or not.
     if(head == NULL) 
         cout << "The list is empty..!!" << endl;
     if (position == 1) {
         DeleteAtHead();
         return;
     }
-    // To delete the last node in the list
+    // To delete the last node in the list.
     if (position == CountNodes()) {
         DeleteAtTail();
         return;
@@ -103,6 +106,7 @@ void List::DeleteAtPosition(int position) {
 }  
 
 int List::CountNodes() {
+    //Check if the list is empty or not.
     if (head == NULL) {
         cout << "The list is empty" << endl;
         return 0;
@@ -118,6 +122,7 @@ int List::CountNodes() {
 
 
 void List::DeleteAtHead() {
+    //Check if the list is empty or not.
     if (head == NULL) {
         cout << "The list is empty";
         return;
@@ -128,6 +133,7 @@ void List::DeleteAtHead() {
 
 void List::InsertAtPosition(int data, int position) {
     Node *newNode = new Node(data);
+    //Check if the list is empty and if emtpy make the newNode as head node of the list.
     if(head == NULL) {
         head = newNode;
         return;
@@ -137,6 +143,7 @@ void List::InsertAtPosition(int data, int position) {
         InsertAtHead(data);
         return;
     }
+    //Traversing to the position to insert.
     while(position > 1 && temp != NULL) {
         position--;
         temp = temp->next;
@@ -148,6 +155,7 @@ void List::InsertAtPosition(int data, int position) {
 
 void List::InsertAtHead(int data) {
     Node *newNode = new Node(data);
+    //Check if the list is empty and if the list is empty make the newNode as the head of the list.
     if(head == NULL) {
         head = newNode;
         return;
@@ -158,6 +166,7 @@ void List::InsertAtHead(int data) {
 }
 
 void List::DeleteAtTail(){
+    //Check if the list is empty or not.
     if(head == NULL) {
         cout << "The list is empty";
         return;
@@ -171,10 +180,12 @@ void List::DeleteAtTail(){
 
 void List::Insert(int data) {
     Node *newNode = new Node(data);
+    //Check if the list is empty or not and if the list is empty, make the newNode as head of the list.
     if (head == NULL) {
         head = newNode;
         return;
     }
+    //If not empty, traverse to the end of the list.
     Node *temp = head;
     while (temp->next != NULL)
         temp = temp->next;
@@ -183,6 +194,7 @@ void List::Insert(int data) {
 }
 
 void List::Display() {
+    //Check if the list is empty or not.
     if (head == NULL) {
         cout << "The list is empty";
         return;
@@ -199,7 +211,6 @@ void List::Display() {
 }
 
 int main() {
-    
     List list;
     int ch,temp,p;
     do {
