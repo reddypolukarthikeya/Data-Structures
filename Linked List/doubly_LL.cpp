@@ -223,6 +223,7 @@ int main() {
         cout << "7.Reverse" << endl;
         cout << "8.Reverse Display" << endl;
         cout << "9.Display" << endl;
+        cout << "10.Exit" << endl;
         cout << "\n\tEnter your choice: [  ]\b\b\b";
         cin >> ch;
         switch (ch) {
