@@ -13,12 +13,16 @@ class Stack {
         void Push(int);
         int Pop();
         void Display();
+        //Destructor.
+        ~Stack () {
+            cout << endl << "Object Destroyed...!!!";
+        }
 };
 
 void Stack::Push(int n) {
     //if the stack is emtpy
-    top++;
-    Arr[top] = n;
+    //pre-increment is used because the value of top is increased first and inserted into the stack.
+    Arr[++top] = n;
 }
 
 int Stack::Pop() {
@@ -27,12 +31,13 @@ int Stack::Pop() {
         return -1;
     }
     int temp;
-    temp = Arr[top];
-    top--;
+    //post-decrement is used because the value of the top is assigned to the temp variable and then decremented.
+    temp = Arr[top--];
     return temp;
 }
 
 void Stack::Display() {
+    //Check if the stack is empty or not.
     if (top == -1) {
         cout << endl << "Stack is empty";
         return;
