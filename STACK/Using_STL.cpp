@@ -24,10 +24,16 @@ int main() {
                 s.push(temp);
             break;
             case 2:
-                cout << endl << "The element popped out is: " << s.pop(); 
+                if(s.empty())  {
+                    cout << endl << "Stack Underflow..!!";
+                    break;
+                }
+                cout << endl << "The element popped out is: ";
+                cout << s.top();
+                s.pop();
             break;
             case 3:
-                t = s; 
+                t = s;
                 while(!t.empty()) {
                     cout << t.top() << endl;
                     t.pop();
