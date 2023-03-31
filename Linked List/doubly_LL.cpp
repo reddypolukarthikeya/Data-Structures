@@ -1,5 +1,7 @@
 #include <iostream>
 
+
+// Using 'nampespace std;' is considered as bad programming practice.
 using std::cin;
 using std::cout;
 using std::endl;
@@ -98,7 +100,6 @@ void List::DeleteAtPosition(int position) {
         temp = temp->next;
         position--;
     }
-    
     temp = temp->prev;
     temp->next = temp->next->next;
     temp = temp->next;
