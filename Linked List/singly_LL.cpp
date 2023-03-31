@@ -1,9 +1,9 @@
 #include <iostream>
 
+// Using 'nampespace std;' is considered as bad programming practice.
 using std::cin;
 using std::cout;
 using std::endl;
-
 
 class Node {
     public:
@@ -19,15 +19,19 @@ class Node {
         this->data = data;
         this->next = NULL;
     }
-    ~Node() {}
+    //Desstructor to destroy the nodes and free memory allocated to the nodes.
+    ~Node() {
+        cout << endl << "All the node have been destroyed..!!";
+    }
 };
 
   
 class LinkedList {
     public:
         Node *head = NULL;
+        //Destructor to detroy the linked list and free memory allocated the list.
         ~LinkedList() {
-            cout << endl << "Object Destroyed...!!!";
+            cout << endl << "List has been Destroyed...!!!";
         }
         void Insert(int data);
         void DeleteAtPosition(int);
@@ -41,9 +45,11 @@ class LinkedList {
 };
 
 void LinkedList::RemoveDuplicates() {
+    //Check if the list is empty.
     if (head == NULL) 
         return;
     Node *temp = head;
+    //If the data of the current node is equal to the data of the next node then remove the next node.
     while (temp->next != NULL) {
         if (temp->data == temp->next->data) {
             temp->next = temp->next->next;
@@ -51,11 +57,6 @@ void LinkedList::RemoveDuplicates() {
         else 
             temp = temp->next;
     }
-}
-
-void LinkedList::DeleteAtHead() {
-    head = head->next;
-    head = head->next;
 }
 
 int LinkedList::CountNodes() {
@@ -72,15 +73,24 @@ int LinkedList::CountNodes() {
     return count;
 }
 
+/*NOTE:- #### HERE DELETION MEANS POINTING TO THE NEXT->NEXT NODE AND NOT ACTUALLY DELETING THE NODE. 
+         Here free() or delete() is not used because it gives segmentation fault.
+         In the end thats why a destructor is added to destroy the memory used and free the allocated memory.#### */
+void LinkedList::DeleteAtHead() {
+    //Deleting head meaning moving the head to the next node.
+    head = head->next;
+    head = head->next;
+}
+
 void LinkedList::DeleteAtPosition(int position) {
-    //if the list is empty
+    //if the list is empty.
     if (head == NULL) {
         cout << "The list is empty";
         return;
     } 
     Node *temp1 = head;
     Node *temp2 = head;
-    
+    //Travese to the position and remove the required node.
     while (position) {
         temp1 = temp1->next;
         temp2 = temp2->next;
@@ -95,7 +105,7 @@ void LinkedList::DeleteAtTail() {
         cout << "The list is empty";
         return;
     }
-     
+    //Travese to the last before node and delete it's next node i.e the tail node.
     Node *temp = head;
     if (temp->next == NULL) {
         return;
@@ -172,10 +182,10 @@ void LinkedList::Display() {
 
 int main() {
 
+    //Object of class LinkedList.
     LinkedList list;
-    int position;
-    int temp;
-    int ch;
+    int position,temp,ch;
+    //Menu driven program.
     do {
         cout << "\t\t      MENU" << endl;
         cout << "\t\t1.Insert at head" << endl;
@@ -227,5 +237,4 @@ int main() {
                 return 0;
         }
     }while(ch != 99);
-    return 0;
 }
