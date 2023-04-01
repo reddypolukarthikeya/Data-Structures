@@ -101,7 +101,9 @@ int main() {
 
     //Object of class LinkedList.
     LinkedList list;
-    int temp,ch,position=0;
+    int temp,ch;
+    //Since position cannot be negative unsigned int is used.
+    unsigned int position=0;
     //Menu driven program.
     do {
         cout << "\t\t      MENU" << endl;
