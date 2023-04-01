@@ -66,7 +66,7 @@ int LinkedList::CountNodes() {
         cout << count;
         return -1;
     }
-    while(temp->next != NULL) {
+    while(temp != NULL) {
         temp = temp->next;
         count++;
     }
