@@ -37,6 +37,10 @@ class LinkedList {
         void Display();
 };
 
+/*NOTE:- ->HERE DELETION MEANS POINTING TO THE NEXT->NEXT NODE AND NOT ACTUALLY DELETING THE NODE. 
+          ->Here free() or delete() is not used because it gives segmentation fault.
+          ->In the end thats why a destructor is added to destroy the memory used and free the allocated memory.
+*/
 void LinkedList::DeleteAtTail() {
     //if the list is empty 
     if (head == NULL) {
