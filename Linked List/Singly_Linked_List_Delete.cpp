@@ -40,7 +40,7 @@ class LinkedList {
 
 /*NOTE:- ->HERE DELETION MEANS POINTING TO THE NEXT->NEXT NODE AND NOT ACTUALLY DELETING THE NODE. 
          ->Reasons for not using free() and delete() :
-                a.Since the objects of a class are static, not dynamic.
+                a.Using free() to deallocate memory allocated for an object in C++ is not recommended because it does not call the object's destructor.
                 b.When executed, a "SEGMENTATION FAULT" will occur.
          ->In the end thats why a destructor is added to destroy the memory used and free the allocated memory.
 */
@@ -60,6 +60,9 @@ void LinkedList::DeleteAtTail() {
         temp = temp->next;
     }
     temp->next = NULL;
+     /*NOTE:- If segmentation fault occurs it means you are trying to delete the node that is not available.
+             In other words, given position > total number of nodes.
+    */
 }
 
 void LinkedList::Insert(int data) {
