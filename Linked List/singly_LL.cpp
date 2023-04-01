@@ -73,9 +73,12 @@ int LinkedList::CountNodes() {
     return count;
 }
 
-/*NOTE:- #### HERE DELETION MEANS POINTING TO THE NEXT->NEXT NODE AND NOT ACTUALLY DELETING THE NODE. 
-         Here free() or delete() is not used because it gives segmentation fault.
-         In the end thats why a destructor is added to destroy the memory used and free the allocated memory.#### */
+/*NOTE:- ->HERE DELETION MEANS POINTING TO THE NEXT->NEXT NODE AND NOT ACTUALLY DELETING THE NODE. 
+         ->Reasons for not using free() and delete() :
+                a.Using free() to deallocate memory allocated for an object in C++ is not recommended because it does not call the object's destructor.
+                b.When executed, a "SEGMENTATION FAULT" will occur.
+         ->In the end thats why a destructor is added to destroy the memory used and free the allocated memory.
+*/
 void LinkedList::DeleteAtHead() {
     //Deleting head meaning moving the head to the next node.
     head = head->next;
@@ -88,15 +91,16 @@ void LinkedList::DeleteAtPosition(int position) {
         cout << "The list is empty";
         return;
     } 
-    Node *temp1 = head;
-    Node *temp2 = head;
-    //Travese to the position and remove the required node.
-    while (position) {
-        temp1 = temp1->next;
-        temp2 = temp2->next;
-        position--;
+    if (position == 1) {
+        head = head->next;
+        return;
     }
-    temp1->next = temp2->next->next;
+    Node *temp = head;
+    //Travese to the position and remove the required node.
+    while (--position > 1) {
+        temp = temp->next;
+    }
+    temp->next = temp->next->next;
 }
 
 void LinkedList::DeleteAtTail() {
