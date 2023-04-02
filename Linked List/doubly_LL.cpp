@@ -27,7 +27,17 @@ class List {
     private:
         Node *head = NULL;
     public:
+        // Default destructor only deletes head (allocated by constructor).
+        // We need destructor to free the memory used by all individual nodes.
         ~List() {
+            Node *temp = head;
+            while(head != NULL) {
+                head = head->next;
+                free (temp);
+                temp = head;
+            }
+            free(head);
+            free(temp);
             cout << endl << "The object is destroyed...!!!";
         }
         int CountNodes();
@@ -224,7 +234,7 @@ int main() {
         cout << "7.Reverse" << endl;
         cout << "8.Reverse Display" << endl;
         cout << "9.Display" << endl;
-        cout << "10.Exit" << endl;
+        cout << "99.Exit" << endl;
         cout << "\n\tEnter your choice: [  ]\b\b\b";
         cin >> ch;
         switch (ch) {
