@@ -19,18 +19,21 @@ class Node {
         this->data = data;
         this->next = NULL;
     }
-    //Desstructor to destroy the nodes and free memory allocated to the nodes.
-    ~Node() {
-        cout << endl << "All the node have been destroyed..!!";
-    }
 };
-
   
 class LinkedList {
     public:
         Node *head = NULL;
         //Destructor to detroy the linked list and free memory allocated the list.
+        // Default destructor only deletes head (allocated by constructor).
+        // We need destructor to free the memory used by all individual nodes.
         ~LinkedList() {
+            Node *temp = head;
+            while(head != NULL) {
+                head = head->next;
+                free(temp);
+                temp = head;
+            }
             cout << endl << "List has been Destroyed...!!!";
         }
         void Insert(int data);
