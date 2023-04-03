@@ -39,31 +39,3 @@ g++ program-name.cpp -o program-name
 ./program-name
 ```
 
-# Contributing
-
-Contributions are always welcome! If you want to contribute to this project, please follow these steps:
-
-1.Fork the repository.
-
-2.Create a new branch for your feature or bug fix:
-
-```
-git checkout -b my-new-branch
-```
-3.Make your changes and commit them:
-
-```
-git commit -m "Add new feature" -a
-```
-
-4.Push your changes to your fork:
-
-```
-git push origin my-new-branch
-```
-
-5.Create a pull request for your changes.
-
-# License
-
-This project is licensed under the MIT License - see the LICENSE file for details.
