@@ -12,26 +12,26 @@ class Node {
     //Unparameterized constructor
     Node() {
         data = -1;
-        next = NULL;
+        next = nullptr;
     }
     //Parameterized constructor
     Node (int data) {
         this->data = data;
-        this->next = NULL;
+        this->next = nullptr;
     }
 };
 
 class LinkedList {
     public:
-        Node *head = NULL;
+        Node *head = nullptr;
         //Destructor to detroy the linked list and free memory allocated the list.
         // Default destructor only deletes head (allocated by constructor).
         // We need destructor to free the memory used by all individual nodes.
         ~LinkedList() {
             Node *temp = head;
-            while(head != NULL) {
+            while(head != nullptr) {
                 head = head->next;
-                free(temp);
+                delete temp;
                 temp = head;
             }
             cout << endl << "List has been Destroyed...!!!";
@@ -49,20 +49,25 @@ class LinkedList {
 */
 void LinkedList::DeleteAtTail() {
     //if the list is empty 
-    if (head == NULL) {
+    if (head == nullptr) {
         cout << "The list is empty";
         return;
     }
     //If the list contains only one node.
-    Node *temp = head;
-    if (temp->next == NULL) {
+    if (head->next == nullptr) {
+        delete head;
+        head = nullptr;
         return;
     }
-    //Travese to the last before node and delete it's next node i.e the tail node.
-    while (temp->next->next != NULL) {
-        temp = temp->next;
+    //Travese to the last before node using prev and delete it's next node "curr" i.e the tail node.
+    Node *prev = nullptr;
+    Node *curr = head;
+    while(curr->next != nullptr) {
+        prev = curr;
+        curr = curr->next;
     }
-    temp->next = NULL;
+    prev->next = nullptr;
+    delete curr;
      /*NOTE:- If segmentation fault occurs it means you are trying to delete the node that is not available.
              In other words, given position > total number of nodes.
     */
@@ -71,14 +76,14 @@ void LinkedList::DeleteAtTail() {
 void LinkedList::Insert(int data) {
     //If the list is empty create a Node
     Node *newNode = new Node(data);
-    if (head == NULL) {
+    if (head == nullptr) {
         head = newNode;
         return;
     }
     else {
         Node *temp = head;
         //Traverse to the end of the list
-        while(temp->next != NULL) {
+        while(temp->next != nullptr) {
             temp = temp->next;
         }
         temp->next = newNode;
@@ -88,13 +93,13 @@ void LinkedList::Insert(int data) {
 
 void LinkedList::Display() {
     //Check if the list is empty.
-    if (head == NULL) {
+    if (head == nullptr) {
         cout << "List is empty" << endl;
         return;
     }
     //If the list is not empty
     Node *temp = head;
-    while (temp != NULL) {
+    while (temp != nullptr) {
         cout << temp->data << endl;
         temp = temp->next;
     }
