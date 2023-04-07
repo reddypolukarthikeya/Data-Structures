@@ -32,7 +32,7 @@ class LinkedList {
             Node *temp = head;
             while(head != NULL) {
                 head = head->next;
-                free(temp);
+                delete temp;
                 temp = head;
             }
             cout << endl << "List has been Destroyed...!!!";
@@ -43,10 +43,11 @@ class LinkedList {
 };
 
 /*NOTE:- ->HERE DELETION MEANS POINTING TO THE NEXT->NEXT NODE AND NOT ACTUALLY DELETING THE NODE. 
-         ->Reasons for not using free() and delete() :
+         ->Reasons for not using free() :
                 a.Using free() to deallocate memory allocated for an object in C++ is not recommended because it does not call the object's destructor.
                 b.When executed, a "SEGMENTATION FAULT" will occur.
-         ->In the end thats why a destructor is added to destroy the memory used and free the allocated memory.
+                c.free() can only be used to deallocate memory that has been allocated using "malloc()" and "calloc()".
+                d.delete is used when the memory is allocated using "new";
 */
 void LinkedList::DeleteAtHead() {
     //Check if teh list is empty.
@@ -55,7 +56,9 @@ void LinkedList::DeleteAtHead() {
         return;
     }
     //Deleting head means moving the head to the next node.
+    Node *temp = head;
     head = head->next;
+    delete temp;
      /*NOTE:- If segmentation fault occurs it means you are trying to delete the node that is not available.
              In other words, given position > total number of nodes.
     */
