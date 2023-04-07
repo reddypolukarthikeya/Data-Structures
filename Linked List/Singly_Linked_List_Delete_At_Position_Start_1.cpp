@@ -78,11 +78,7 @@ void LinkedList::DeleteAtPosition(int position) {
     }
     else 
         cout << "Invalid position " << endl;
-    //Travese to the position and remove the required node.
-    
-    /*NOTE:- If segmentation fault occurs it means you are trying to delete the node that is not available.
-             In other words, given position > total number of nodes.
-    */
+    size--;
 }
 
 void LinkedList::Insert(int data) {
