@@ -60,6 +60,10 @@ void LinkedList::DeleteAtPosition(int position) {
         cout << "The list is empty";
         return;
     } 
+    if(position == 0) {
+        cout << endl << "Invalid position..!!" ;
+        return;
+    }
     if (position == 1) {
         Node *temp = head;
         head = head->next;
