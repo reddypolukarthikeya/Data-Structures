@@ -24,7 +24,7 @@ class Node {
 class LinkedList {
     public:
         Node *head;
-        unsigned int size;
+            int size;
         //Constructor to initialize the linked list.
         LinkedList() {
             head = nullptr;
@@ -56,28 +56,25 @@ class LinkedList {
 */
 void LinkedList::DeleteAtPosition(int position) {
     //if the list is empty.
-    if (head == nullptr) {
-        cout << "The list is empty";
+    if (position >= size) {
+        cout << endl << "Invalid Position...!!!";
         return;
-    } 
+    }
+    Node *temp = head;
     if (position == 0) {
-        Node *temp = head;
         head = head->next;
         delete temp;
         return;
     }
-    if (position > size) 
-        cout << "Invalid position " << endl;
-    else {
-        Node *prev = nullptr;
-        Node *curr = head;
-        for (int i = 0;i < size && i < position ; i++) {
-            prev = curr;
-            curr = curr->next;
-        }
-        prev->next = curr->next;
-        delete curr;
+    Node *prev = nullptr;
+    temp = head;
+    while (position > 0 && temp->next != nullptr) {
+        prev = temp;
+        temp = temp->next;
+        position--;
     }
+    prev->next = temp->next;
+    delete temp;
     size--;
 }
 
