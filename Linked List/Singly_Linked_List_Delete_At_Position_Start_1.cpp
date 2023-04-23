@@ -55,33 +55,26 @@ class LinkedList {
                 d.delete is used when the memory is allocated using "new";
 */
 void LinkedList::DeleteAtPosition(int position) {
-    //if the list is empty.
-    if (head == nullptr) {
-        cout << "The list is empty";
-        return;
-    } 
-    if(position == 0) {
-        cout << endl << "Invalid position..!!" ;
+    //if the list is empty.  
+    if (position > size || position <= 0) {
+        cout << endl << "Invalid Position";
         return;
     }
+    Node *temp = head;
     if (position == 1) {
-        Node *temp = head;
         head = head->next;
         delete temp;
         return;
     }
-    if (position <= size-1) {
-        Node *prev = nullptr;
-        Node *curr = head;
-        for (int i = 2;i <= size && i <= position ; i++) {
-            prev = curr;
-            curr = curr->next;
-        }
-        prev->next = curr->next;
-        delete curr;
+    Node *prev = nullptr;
+    temp = head;
+    while (position > 1 && temp->next != nullptr) {
+        prev = temp->next;
+        temp = temp->next;
+        position--;
     }
-    else 
-        cout << "Invalid position " << endl;
+    prev->next = temp->next;
+    delete temp;
     size--;
 }
 
