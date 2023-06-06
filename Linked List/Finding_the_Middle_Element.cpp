@@ -26,8 +26,11 @@ class List {
 };
 
 void List::Find_Middle() {
+    // The first pointer moves by one node at a time.
     Node *ptr1 = head;
+    // The second poitner moves by two nodes at a time.
     Node *ptr2 = ptr1->next;
+    // By the time the second pointer moves to last node, the first pointer moves to the middle of the list.
     while (ptr2->next != nullptr) {
         ptr1 = ptr1->next;
         ptr2 = ptr2->next;
