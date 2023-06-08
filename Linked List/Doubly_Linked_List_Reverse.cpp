@@ -92,10 +92,32 @@ void List::Reverse () {
 
 int main() {
     List l;
-    l.Insert(1);
-    l.Insert(2);
-    l.Insert(3);
-    l.Reverse();
-    l.Display();
+    int ch;
+    do {
+        cout << endl << "\t MENU " << endl;
+        cout << "1.Insert" << endl;
+        cout << "2.Reverse" << endl;
+        cout << "3.Display" << endl;
+        cout << "4.EXIT" << endl;
+        cout << "Enter your choice :[ ]\b\b";
+        cin >> ch;
+        switch(ch) {
+            case 1:
+                int temp;
+                cout << endl << "Enter the element to insert: ";
+                cin >> temp;
+                l.Insert(temp);
+            break;
+            case 2: 
+                l.Reverse();
+            break;
+            case 3:
+                l.Display();
+            break;
+            case 4:
+                return 0;
+            break;
+        }
+    }while (ch != 4);
     return 0;
 }
