@@ -1,6 +1,5 @@
 #include <iostream>
 
-
 // Using 'nampespace std;' is considered as bad programming practice.
 using std::cin;
 using std::cout;
@@ -12,26 +11,26 @@ class Node {
         int data;
         Node *next;
         Node() {
-            prev = NULL;
+            prev = nullptr;
             data = -1;
-            next = NULL;
+            next = nullptr;
         }
         Node (int data) {
-            prev = NULL;
+            prev = nullptr;
             this->data = data;
-            next = NULL;
+            next = nullptr;
         }
 };
 
 class List {
     private:
-        Node *head = NULL;
+        Node *head = nullptr;
     public:
         // Default destructor only deletes head (allocated by constructor).
         // We need destructor to free the memory used by all individual nodes.
         ~List() {
             Node *temp = head;
-            while(head != NULL) {
+            while(head != nullptr) {
                 head = head->next;
                 free (temp);
                 temp = head;
@@ -55,33 +54,33 @@ class List {
 
 //This function actually performs the reverse function.
 void List::Reverse() {
-    if (head == NULL){
+    if (head == nullptr){
         cout << "The list is empty...!!!" << endl;
         return;
     }
-    Node *temp = NULL;
+    Node *temp = nullptr;
     Node *current = head;
     // Swap all the prev and next
-    while(current != NULL) {
+    while(current != nullptr) {
         temp = current->prev;
         current->prev = current->next;
         current->next = temp;
         current = current->prev;
     }
-    if (temp != NULL)
+    if (temp != nullptr)
         head = temp->prev;
 }
 
 //Note:- This function does not reverse the linked instead it just prints in reverse order.
 void List::ReverseDispaly() {
-    if (head == NULL) {
+    if (head == nullptr) {
         cout << "The list is empty...!!!" << endl;
         return;
     }
     Node *temp = head;
-    while(temp->next != NULL) 
+    while(temp->next != nullptr) 
         temp = temp->next;
-    while(temp != NULL) {
+    while(temp != nullptr) {
         cout << temp->data << " ";
         temp = temp->prev;
     }
@@ -94,7 +93,7 @@ void List::DeleteAtPosition(int position) {
         return;
     }
     // Check if the list is empty or not.
-    if(head == NULL) 
+    if(head == nullptr) 
         cout << "The list is empty..!!" << endl;
     if (position == 1) {
         DeleteAtHead();
@@ -106,7 +105,7 @@ void List::DeleteAtPosition(int position) {
         return;
     }
     Node *temp = head;
-    while (position > 1 && temp->next != NULL) {
+    while (position > 1 && temp->next != nullptr) {
         temp = temp->next;
         position--;
     }
@@ -118,34 +117,33 @@ void List::DeleteAtPosition(int position) {
 
 int List::CountNodes() {
     //Check if the list is empty or not.
-    if (head == NULL) {
+    if (head == nullptr) {
         cout << "The list is empty" << endl;
         return 0;
     }
     int count=0;
     Node *temp = head;
-    while(temp != NULL) {
+    while(temp != nullptr) {
         count++;
         temp = temp->next;
     }
     return count;
 }
 
-
 void List::DeleteAtHead() {
     //Check if the list is empty or not.
-    if (head == NULL) {
+    if (head == nullptr) {
         cout << "The list is empty";
         return;
     }
     head = head->next;
-    head->prev = NULL;
+    head->prev = nullptr;
 }
 
 void List::InsertAtPosition(int data, int position) {
     Node *newNode = new Node(data);
     //Check if the list is empty and if emtpy make the newNode as head node of the list.
-    if(head == NULL) {
+    if(head == nullptr) {
         head = newNode;
         return;
     }
@@ -155,7 +153,7 @@ void List::InsertAtPosition(int data, int position) {
         return;
     }
     //Traversing to the position to insert.
-    while(position > 1 && temp != NULL) {
+    while(position > 1 && temp != nullptr) {
         position--;
         temp = temp->next;
     }  
@@ -167,7 +165,7 @@ void List::InsertAtPosition(int data, int position) {
 void List::InsertAtHead(int data) {
     Node *newNode = new Node(data);
     //Check if the list is empty and if the list is empty make the newNode as the head of the list.
-    if(head == NULL) {
+    if(head == nullptr) {
         head = newNode;
         return;
     }
@@ -176,29 +174,29 @@ void List::InsertAtHead(int data) {
     head = newNode;
 }
 
-void List::DeleteAtTail(){
+void List::DeleteAtTail() {
     //Check if the list is empty or not.
-    if(head == NULL) {
+    if(head == nullptr) {
         cout << "The list is empty";
         return;
     }
     Node *temp = head;
-    while(temp->next != NULL) 
+    while(temp->next != nullptr) 
         temp = temp->next;
     temp = temp->prev;
-    temp->next = NULL;
+    temp->next = nullptr;
 }
 
 void List::Insert(int data) {
     Node *newNode = new Node(data);
     //Check if the list is empty or not and if the list is empty, make the newNode as head of the list.
-    if (head == NULL) {
+    if (head == nullptr) {
         head = newNode;
         return;
     }
     //If not empty, traverse to the end of the list.
     Node *temp = head;
-    while (temp->next != NULL)
+    while (temp->next != nullptr)
         temp = temp->next;
     temp->next = newNode;
     newNode->prev = temp;
@@ -206,13 +204,13 @@ void List::Insert(int data) {
 
 void List::Display() {
     //Check if the list is empty or not.
-    if (head == NULL) {
+    if (head == nullptr) {
         cout << "The list is empty";
         return;
     }
     Node *temp = head;
-    while(temp != NULL) {
-        if(temp->next == NULL) {
+    while(temp != nullptr) {
+        if(temp->next == nullptr) {
             cout << temp->data;
             return;
         }
