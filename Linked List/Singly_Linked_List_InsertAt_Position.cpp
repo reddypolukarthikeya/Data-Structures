@@ -32,7 +32,7 @@ class LinkedList {
             Node *temp = head;
             while(head != NULL) {
                 head = head->next;
-                free(temp);
+                delete temp;
                 temp = head;
             }
             cout << endl << "List has been Destroyed...!!!";
@@ -75,6 +75,8 @@ void LinkedList::InsertAtPosition (int data, int position) {
     temp2 = temp1->next;
     temp1->next = newNode;
     newNode->next = temp2;
+    delete temp1;
+    delete temp2;
 }
 
 int main() {
@@ -87,10 +89,10 @@ int main() {
     //Menu driven program.
     do {
         cout << "\t\t      MENU" << endl;
-        cout << "\t\t1.Insert at HEAD" << endl;
+        cout << "\t\t1.Insert at Position" << endl;
         cout << "\t\t2.Display" << endl;
         cout << "\t\t3.Exit" << endl;
-        cout << "Enter your choice: [  ]\b\b" << endl;
+        cout << "Enter your choice: [  ]\b\b";
         cin >> ch;
         switch(ch) {
                 case 1:
