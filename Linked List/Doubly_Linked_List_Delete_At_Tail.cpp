@@ -12,26 +12,26 @@ class Node {
         int data;
         Node *next;
         Node() {
-            prev = NULL;
+            prev = nullptr;
             data = -1;
-            next = NULL;
+            next = nullptr;
         }
         Node (int data) {
-            prev = NULL;
+            prev = nullptr;
             this->data = data;
-            next = NULL;
+            next = nullptr;
         }
 };
 
 class List {
     private:
-        Node *head = NULL;
+        Node *head = nullptr;
     public:
         // Default destructor only deletes head (allocated by constructor).
         // We need destructor to free the memory used by all individual nodes.
         ~List() {
             Node *temp = head;
-            while(head != NULL) {
+            while(head != nullptr) {
                 head = head->next;
                 free (temp);
                 temp = head;
@@ -54,27 +54,27 @@ class List {
 */
 void List::DeleteAtTail(){
     //Check if the list is empty or not.
-    if(head == NULL) {
+    if(head == nullptr) {
         cout << "The list is empty";
         return;
     }
     Node *temp = head;
-    while(temp->next != NULL) 
+    while(temp->next != nullptr) 
         temp = temp->next;
     temp = temp->prev;
-    temp->next = NULL;
+    temp->next = nullptr;
 }
 
 void List::Insert(int data) {
     Node *newNode = new Node(data);
     //Check if the list is empty or not and if the list is empty, make the newNode as head of the list.
-    if (head == NULL) {
+    if (head == nullptr) {
         head = newNode;
         return;
     }
     //If not empty, traverse to the end of the list.
     Node *temp = head;
-    while (temp->next != NULL)
+    while (temp->next != nullptr)
         temp = temp->next;
     temp->next = newNode;
     newNode->prev = temp;
@@ -82,13 +82,13 @@ void List::Insert(int data) {
 
 void List::Display() {
     //Check if the list is empty or not.
-    if (head == NULL) {
+    if (head == nullptr) {
         cout << "The list is empty";
         return;
     }
     Node *temp = head;
-    while(temp != NULL) {
-        if(temp->next == NULL) {
+    while(temp != nullptr) {
+        if(temp->next == nullptr) {
             cout << temp->data;
             return;
         }
