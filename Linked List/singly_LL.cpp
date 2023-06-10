@@ -12,12 +12,12 @@ class Node {
     //Unparameterized constructor
     Node() {
         data = -1;
-        next = NULL;
+        next = nullptr;
     }
     //Parameterized constructor
     Node (int data) {
         this->data = data;
-        this->next = NULL;
+        this->next = nullptr;
     }
     //Desstructor to destroy the nodes and free memory allocated to the nodes.
     ~Node() {
@@ -28,9 +28,17 @@ class Node {
   
 class LinkedList {
     public:
-        Node *head = NULL;
+        Node *head = nullptr;
         //Destructor to detroy the linked list and free memory allocated the list.
         ~LinkedList() {
+            Node *temp = head;
+            while (head) {
+                head = head->next;
+                delete temp;
+                temp = head;
+            }
+            delete temp;
+            delete head;
             cout << endl << "List has been Destroyed...!!!";
         }
         void Insert(int data);
@@ -46,11 +54,11 @@ class LinkedList {
 
 void LinkedList::RemoveDuplicates() {
     //Check if the list is empty.
-    if (head == NULL) 
+    if (head == nullptr) 
         return;
     Node *temp = head;
     //If the data of the current node is equal to the data of the next node then remove the next node.
-    while (temp->next != NULL) {
+    while (temp->next != nullptr) {
         if (temp->data == temp->next->data) {
             temp->next = temp->next->next;
         }
@@ -62,11 +70,11 @@ void LinkedList::RemoveDuplicates() {
 int LinkedList::CountNodes() {
     Node *temp = head;
     int count =0;
-    if (head == NULL) {
+    if (head == nullptr) {
         cout << count;
         return -1;
     }
-    while(temp != NULL) {
+    while(temp != nullptr) {
         temp = temp->next;
         count++;
     }
@@ -87,7 +95,7 @@ void LinkedList::DeleteAtHead() {
 
 void LinkedList::DeleteAtPosition(int position) {
     //if the list is empty.
-    if (head == NULL) {
+    if (head == nullptr) {
         cout << "The list is empty";
         return;
     } 
@@ -105,26 +113,26 @@ void LinkedList::DeleteAtPosition(int position) {
 
 void LinkedList::DeleteAtTail() {
     //if the list is empty 
-    if (head == NULL) {
+    if (head == nullptr) {
         cout << "The list is empty";
         return;
     }
     //Travese to the last before node and delete it's next node i.e the tail node.
     Node *temp = head;
-    if (temp->next == NULL) {
+    if (temp->next == nullptr) {
         return;
     }
-    while (temp->next->next != NULL) {
+    while (temp->next->next != nullptr) {
         temp = temp->next;
     }
-    temp->next = NULL;
+    temp->next = nullptr;
 }
 
 void LinkedList::InsertAtPosition (int data, int position) {
     position --;
     Node *newNode = new Node(data);
     //if the list is empty 
-    if (head == NULL) {
+    if (head == nullptr) {
         head = newNode;
         return;
     }
@@ -142,7 +150,7 @@ void LinkedList::InsertAtPosition (int data, int position) {
 void LinkedList::InsertAtHead(int data) {
     Node *newNode = new Node(data);
     //if the list is empty 
-    if (head == NULL) {
+    if (head == nullptr) {
         head = newNode;
         return;
     }
@@ -155,14 +163,14 @@ void LinkedList::InsertAtHead(int data) {
 void LinkedList::Insert(int data) {
     //If the list is empty create a Node
     Node *newNode = new Node(data);
-    if (head == NULL) {
+    if (head == nullptr) {
         head = newNode;
         return;
     }
     else {
         Node *temp = head;
         //Traverse to the end of the list
-        while(temp->next != NULL) {
+        while(temp->next != nullptr) {
             temp = temp->next;
         }
         temp->next = newNode;
@@ -171,13 +179,13 @@ void LinkedList::Insert(int data) {
 }
 
 void LinkedList::Display() {
-    if (head == NULL) {
+    if (head == nullptr) {
         cout << "List is empty" << endl;
         return;
     }
     //If the list is not empty
     Node *temp = head;
-    while (temp != NULL) {
+    while (temp != nullptr) {
         cout << temp->data << endl;
         temp = temp->next;
     }
