@@ -32,7 +32,7 @@ class LinkedList {
             Node *temp = head;
             while(head != NULL) {
                 head = head->next;
-                free(temp);
+                delete temp;
                 temp = head;
             }
             cout << endl << "List has been Destroyed...!!!";
@@ -83,6 +83,7 @@ int main() {
         cin >> ch;
         switch(ch) {
                 case 1:
+                    cout << "Enter the element to insert: ";
                     cin >> temp;
                     list.InsertAtHead(temp);
                 break;
