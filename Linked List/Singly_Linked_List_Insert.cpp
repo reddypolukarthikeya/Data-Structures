@@ -31,7 +31,7 @@ class LinkedList {
             Node *temp = head;
             while(head != NULL) {
                 head = head->next;
-                free(temp);
+                delete temp;
                 temp = head;
             }
             cout << endl << "List has been Destroyed...!!!";
