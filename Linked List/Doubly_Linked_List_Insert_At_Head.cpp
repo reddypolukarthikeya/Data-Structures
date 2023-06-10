@@ -12,32 +12,32 @@ class Node {
         int data;
         Node *next;
         Node() {
-            prev = NULL;
+            prev = nullptr;
             data = -1;
-            next = NULL;
+            next = nullptr;
         }
         Node (int data) {
-            prev = NULL;
+            prev = nullptr;
             this->data = data;
-            next = NULL;
+            next = nullptr;
         }
 };
 
 class List {
     private:
-        Node *head = NULL;
+        Node *head = nullptr;
     public:
         // Default destructor only deletes head (allocated by constructor).
         // We need destructor to free the memory used by all individual nodes.
         ~List() {
             Node *temp = head;
-            while(head != NULL) {
+            while(head != nullptr) {
                 head = head->next;
-                free (temp);
+                delete temp;
                 temp = head;
             }
-            free(head);
-            free(temp);
+            delete head;
+            delete temp;
             cout << endl << "The list is destroyed...!!!";
         }
         void Display();
@@ -47,7 +47,7 @@ class List {
 void List::InsertAtHead(int data) {
     Node *newNode = new Node(data);
     //Check if the list is empty and if the list is empty make the newNode as the head of the list.
-    if(head == NULL) {
+    if(head == nullptr) {
         head = newNode;
         return;
     }
@@ -58,13 +58,13 @@ void List::InsertAtHead(int data) {
 
 void List::Display() {
     //Check if the list is empty or not.
-    if (head == NULL) {
+    if (head == nullptr) {
         cout << "The list is empty";
         return;
     }
     Node *temp = head;
-    while(temp != NULL) {
-        if(temp->next == NULL) {
+    while(temp != nullptr) {
+        if(temp->next == nullptr) {
             cout << temp->data;
             return;
         }
