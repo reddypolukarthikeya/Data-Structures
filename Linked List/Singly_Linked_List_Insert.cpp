@@ -12,24 +12,24 @@ class Node {
     //Unparameterized constructor
     Node() {
         data = -1;
-        next = NULL;
+        next = nullptr;
     }
     //Parameterized constructor
     Node (int data) {
         this->data = data;
-        this->next = NULL;
+        this->next = nullptr;
     }
 };
   
 class LinkedList {
     public:
-        Node *head = NULL;
+        Node *head = nullptr;
         //Destructor to detroy the linked list and free memory allocated the list.
         // Default destructor only deletes head (allocated by constructor).
         // We need destructor to free the memory used by all individual nodes.
         ~LinkedList() {
             Node *temp = head;
-            while(head != NULL) {
+            while(head != nullptr) {
                 head = head->next;
                 delete temp;
                 temp = head;
@@ -43,14 +43,14 @@ class LinkedList {
 void LinkedList::Insert(int data) {
     //If the list is empty create a Node
     Node *newNode = new Node(data);
-    if (head == NULL) {
+    if (head == nullptr) {
         head = newNode;
         return;
     }
     else {
         Node *temp = head;
         //Traverse to the end of the list
-        while(temp->next != NULL) {
+        while(temp->next != nullptr) {
             temp = temp->next;
         }
         //Link the newNode to the last node in the list.
@@ -61,13 +61,13 @@ void LinkedList::Insert(int data) {
 
 void LinkedList::Display() {
     //Check if the list is empty.
-    if (head == NULL) {
+    if (head == nullptr) {
         cout << "List is empty" << endl;
         return;
     }
     //Traverse to each node and display the data of the node.
     Node *temp = head;
-    while (temp != NULL) {
+    while (temp != nullptr) {
         cout << temp->data << endl;
         temp = temp->next;
     }
