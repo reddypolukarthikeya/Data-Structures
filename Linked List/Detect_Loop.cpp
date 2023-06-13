@@ -94,7 +94,7 @@ bool LinkedList::HasLoop() {
     while (hare && hare->next) {
         tortoise = tortoise->next;
         hare = hare->next->next;
-        // If there is a loop both animals meet a point.
+        // If there is a loop both animals meet at the same node.
         if (hare == tortoise)
         {
             std::cout << "Loop detected";
