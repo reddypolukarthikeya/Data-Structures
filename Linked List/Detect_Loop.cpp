@@ -23,11 +23,28 @@ class List {
             head = nullptr;
             tail = nullptr;
         }
+        // Default destructor only deletes head (allocated by constructor).
+        // We need destructor to free the memory used by all individual nodes.
+        ~List() {
+            Node *temp = head;
+            while (head) {
+                head = head->next;
+                delete temp;
+                temp = head;
+            }
+            std::cout << "\nList has been destroyed.";
+        }
         void Insert (int data);
         void Display();
         bool HasLoop();
         void CreateLoop();
+        void RemoveLoop();
 };
+
+void List::RemoveLoop() {
+    // In order to destroy all the nodes we need to remove the loop.
+    tail->next = nullptr;
+}
 
 void List::CreateLoop () {
     Node *temp = head;
@@ -122,6 +139,7 @@ int main() {
                 l.Display();
             break;
             case 5:
+                l.RemoveLoop();
                 return 0;
             break;
         }
