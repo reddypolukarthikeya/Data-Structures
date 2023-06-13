@@ -13,19 +13,19 @@ class Node {
         }
 };
 
-class List {
+class LinkedList {
     private: 
         Node *head;
         Node *tail;
     public: 
         // Default constructor 
-        List () {
+        LinkedList () {
             head = nullptr;
             tail = nullptr;
         }
         // Default destructor only deletes head (allocated by constructor).
         // We need destructor to free the memory used by all individual nodes.
-        ~List() {
+        ~LinkedList() {
             Node *temp = head;
             while (head) {
                 head = head->next;
@@ -41,12 +41,12 @@ class List {
         void RemoveLoop();
 };
 
-void List::RemoveLoop() {
+void LinkedList::RemoveLoop() {
     // In order to destroy all the nodes we need to remove the loop.
     tail->next = nullptr;
 }
 
-void List::CreateLoop () {
+void LinkedList::CreateLoop () {
     Node *temp = head;
     Node *loopNode = head->next;
     while (temp->next) {
@@ -55,24 +55,24 @@ void List::CreateLoop () {
     temp->next = loopNode;
 }
 
-void List::Insert (int data) {
+void LinkedList::Insert (int data) {
     Node *newNode = new Node (data);
-    // Check if the list is empty or not and if the list is empty, make the newNode as the head.
+    // Check if the LinkedList is empty or not and if the LinkedList is empty, make the newNode as the head.
     if (head == nullptr) {
         head = newNode;
         tail = newNode;
         return;
     }
-    // If the list is not empty, traverse to the end of the list.
+    // If the LinkedList is not empty, traverse to the end of the LinkedList.
     while (tail->next != nullptr)
         tail = tail->next;
     tail->next = newNode;
 }
 
-void List::Display() {
-    // Check if the list is empty or not.
+void LinkedList::Display() {
+    // Check if the LinkedList is empty or not.
     if (head == nullptr) {
-        std::cout<< "\nThe list is empty.";
+        std::cout<< "\nThe LinkedList is empty.";
         return;
     }
     Node *temp = head;
@@ -82,10 +82,10 @@ void List::Display() {
     }
 }
 
-bool List::HasLoop() {
+bool LinkedList::HasLoop() {
     // if head is NULL then return false.
     if (head == nullptr) {
-        std::cout << "\nThe list is empty.";
+        std::cout << "\nThe LinkedList is empty.";
         return false;
     }
     // Create two pointers 'slow' and 'fast'
@@ -111,7 +111,7 @@ bool List::HasLoop() {
 }
 
 int main() {
-    List l;
+    LinkedList l;
     int ch;
     do {
         std::cout << "\n\t\tMenu";
