@@ -36,11 +36,11 @@ class List {
             Node *temp = head;
             while(head != nullptr) {
                 head = head->next;
-                free (temp);
+                delete temp;
                 temp = head;
             }
-            free(head);
-            free(temp);
+            delete head;
+            delete temp;
             cout << endl << "The object is destroyed...!!!";
         }
         void Display();
