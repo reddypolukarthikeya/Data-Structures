@@ -47,12 +47,8 @@ void LinkedList::RemoveLoop() {
 }
 
 void LinkedList::CreateLoop () {
-    Node *temp = head;
     Node *loopNode = head->next;
-    while (temp->next) {
-        temp = temp->next;
-    }
-    temp->next = loopNode;
+    tail->next = loopNode;
 }
 
 void LinkedList::Insert (int data) {
