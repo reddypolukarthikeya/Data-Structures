@@ -1,9 +1,6 @@
 #include <iostream>
 
 // Using 'namespace std; ' is considered as bad programming practice.
-using std::cin;
-using std::cout;
-using std::endl;
 
 class Node {
     public: 
@@ -19,10 +16,12 @@ class Node {
 class List {
     private: 
         Node *head;
+        Node *tail;
     public: 
         // Default constructor 
         List () {
             head = nullptr;
+            tail = nullptr;
         }
         void Insert (int data);
         void Display();
@@ -44,25 +43,24 @@ void List::Insert (int data) {
     // Check if the list is empty or not and if the list is empty, make the newNode as the head.
     if (head == nullptr) {
         head = newNode;
+        tail = newNode;
         return;
     }
     // If the list is not empty, traverse to the end of the list.
-    Node *temp = head;
-    while (temp->next) {
-        temp = temp->next;
-    }
-    temp ->next = newNode;
+    while (tail->next != nullptr)
+        tail = tail->next;
+    tail->next = newNode;
 }
 
 void List::Display() {
     // Check if the list is empty or not.
     if (head == nullptr) {
-        cout<< endl << "The list is empty.";
+        std::cout<< "\nThe list is empty.";
         return;
     }
     Node *temp = head;
     while (temp) {
-        cout << temp->data << endl;
+        std::cout << temp->data << " ";
         temp = temp->next;
     }
 }
@@ -70,7 +68,7 @@ void List::Display() {
 bool List::HasLoop() {
     // if head is NULL then return false.
     if (head == nullptr) {
-        cout << endl << "The list is empty.";
+        std::cout << "\nThe list is empty.";
         return false;
     }
     // Create two pointers 'slow' and 'fast'
@@ -86,12 +84,12 @@ bool List::HasLoop() {
         // If there is a cycle both animals meet a point.
         if (hare == tortoise)
         {
-            cout << "Loop detected";
+            std::cout << "Loop detected";
             return true; // Loop is detected.
         }
     }
     // No loop detected.
-    cout << endl << "No loop detected";
+    std::cout << "\nNo loop detected";
     return false;
 }
 
@@ -99,19 +97,19 @@ int main() {
     List l;
     int ch;
     do {
-        cout << endl << "\t\tMenu";
-        cout << endl << "1.Insert";
-        cout << endl << "2.Create Loop";
-        cout << endl << "3.Detect Loop";
-        cout << endl << "4.Display";
-        cout << endl << "5.Exit";
-        cout << endl << "\tEnter your choice : [ ]\b\b";
-        cin >> ch;
+        std::cout << "\n\t\tMenu";
+        std::cout << "\n1.Insert";
+        std::cout << "\n2.Create Loop";
+        std::cout << "\n3.Detect Loop";
+        std::cout << "\n4.Display";
+        std::cout << "\n5.Exit";
+        std::cout << "\n\tEnter your choice : [ ]\b\b";
+        std::cin>> ch;
         switch (ch) {
             case 1:
                 int temp;
-                cout << endl << "Enter the element to be inserted : ";
-                cin >> temp;
+                std::cout << "\nEnter the element to be inserted : ";
+                std::cin>> temp;
                 l.Insert(temp);
             break;
             case 2:
