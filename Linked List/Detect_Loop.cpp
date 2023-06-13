@@ -24,16 +24,6 @@ class List {
         List () {
             head = nullptr;
         }
-        // Destructor only deletes head (allocated by constructor)
-        // We need a destructor to free the memory used by all the individual nodes.
-        // ~List () {
-        //     Node *temp = head;
-        //     while (head) {
-        //         head = head->next;
-        //         delete temp;
-        //         temp = head;
-        //     }
-        // }
         void Insert (int data);
         void Display();
         bool HasLoop();
