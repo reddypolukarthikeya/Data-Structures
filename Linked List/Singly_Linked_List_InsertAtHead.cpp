@@ -2,6 +2,7 @@
 #include <memory>
 
 // Using 'nampespace std;' is considered as bad programming practice.
+// Since "smart pointers" are used there is no need to use a destructor.
 
 class Node {
     public:
