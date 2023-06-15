@@ -1,9 +1,6 @@
 #include <iostream>
 
 // Using 'nampespace std;' is considered as bad programming practice.
-using std::cin;
-using std::cout;
-using std::endl;
 
 class Node {
     public:
@@ -23,9 +20,16 @@ class Node {
 
   
 class LinkedList {
+    private:
+        Node *head;
+        Node *tail;
     public:
-        Node *head = nullptr;
-        //Destructor to detroy the linked list and free memory allocated the list.
+        // Unparameterized constructor
+        LinkedList () {
+            head = nullptr;
+            tail = nullptr;
+        }
+        // Destructor to detroy the linked list and free memory allocated the list.
         // Default destructor only deletes head (allocated by constructor).
         // We need destructor to free the memory used by all individual nodes.
         ~LinkedList() {
@@ -35,7 +39,7 @@ class LinkedList {
                 delete temp;
                 temp = head;
             }
-            cout << endl << "List has been Destroyed...!!!";
+            std::cout << "\nList has been Destroyed...!!!";
         }
         void InsertAtPosition(int ,int );
         void Display();
@@ -44,13 +48,13 @@ class LinkedList {
 void LinkedList::Display() {
     //Check if the list is empty.
     if (head == nullptr) {
-        cout << "List is empty" << endl;
+        std::cout << "List is empty\n";
         return;
     }
     //If the list is not empty
     Node *temp = head;
     while (temp != nullptr) {
-        cout << temp->data << endl;
+        std::cout << temp->data << " ";
         temp = temp->next;
     }
 }
@@ -74,9 +78,7 @@ void LinkedList::InsertAtPosition (int data, int position) {
     //Assigning the newNode at the given position.
     temp2 = temp1->next;
     temp1->next = newNode;
-    newNode->next = temp2;
-    delete temp1;
-    delete temp2;
+    newNode->next = temp2; 
 }
 
 int main() {
@@ -88,18 +90,18 @@ int main() {
     unsigned int position = 0;
     //Menu driven program.
     do {
-        cout << "\t\t      MENU" << endl;
-        cout << "\t\t1.Insert at Position" << endl;
-        cout << "\t\t2.Display" << endl;
-        cout << "\t\t3.Exit" << endl;
-        cout << "Enter your choice: [  ]\b\b";
-        cin >> ch;
+        std::cout << "\t\t      MENU\n";
+        std::cout << "\t\t1.Insert at Position\n";
+        std::cout << "\t\t2.Display\n";
+        std::cout << "\t\t3.Exit\n";
+        std::cout << "Enter your choice: [  ]\b\b";
+        std::cin >> ch;
         switch(ch) {
                 case 1:
-                    cout << endl << "Enter the data: ";
-                    cin >> temp;
-                    cout << endl << "Enter the positon to insert: ";
-                    cin >> position;
+                    std::cout << "\nEnter the data: ";
+                    std::cin >> temp;
+                    std::cout << "\nEnter the positon to insert: ";
+                    std::cin >> position;
                     list.InsertAtPosition(temp,position);
                 break;
                 case 2:
@@ -107,6 +109,9 @@ int main() {
                 break;
                 case 3:
                     return 0;
+                break;
+                default:
+                    std::cout << "\nInvalid choice..!!";
                 break;
         }
     }while(ch != 3);
