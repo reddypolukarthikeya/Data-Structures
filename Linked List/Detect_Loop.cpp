@@ -42,11 +42,21 @@ class LinkedList {
 };
 
 void LinkedList::RemoveLoop() {
+    // Check if the list is empty.
+    if (head == nullptr) {
+        std::cout << "\nList is empty.";
+        return;
+    }
     // In order to destroy all the nodes we need to remove the loop.
     tail->next = nullptr;
 }
 
 void LinkedList::CreateLoop () {
+    // Check if the list is emtpy.
+    if (head == nullptr) {
+        std::cout << "\nList is empty.";
+        return;
+    }
     Node *loopNode = head->next;
     tail->next = loopNode;
 }
@@ -97,7 +107,7 @@ bool LinkedList::HasLoop() {
         // If there is a loop both animals meet at the same node.
         if (hare == tortoise)
         {
-            std::cout << "Loop detected";
+            std::cout << "\nLoop detected";
             return true; // Loop is detected.
         }
     }
@@ -138,7 +148,9 @@ int main() {
                 l.RemoveLoop();
                 return 0;
             break;
+            default: 
+                std::cout << "\nInvalid choice...!!!";
+            break;
         }
     }while (ch != 5);
-    return 0;
 }
