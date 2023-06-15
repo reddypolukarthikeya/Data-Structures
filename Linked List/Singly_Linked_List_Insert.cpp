@@ -1,9 +1,6 @@
 #include <iostream>
 
 // Using 'nampespace std;' is considered as bad programming practice.
-using std::cin;
-using std::cout;
-using std::endl;
 
 class Node {
     public:
@@ -23,7 +20,13 @@ class Node {
   
 class LinkedList {
     public:
-        Node *head = nullptr;
+        Node *head;
+        Node *tail;
+        // Unparameterized constructor
+        LinkedList() {
+            head = nullptr;
+            tail = nullptr;
+        }
         //Destructor to detroy the linked list and free memory allocated the list.
         // Default destructor only deletes head (allocated by constructor).
         // We need destructor to free the memory used by all individual nodes.
@@ -34,61 +37,57 @@ class LinkedList {
                 delete temp;
                 temp = head;
             }
-            cout << endl << "List has been Destroyed...!!!";
+            std::cout  << "\nList has been Destroyed...!!!";
         }
         void Insert(int data);
         void Display();
 };
 
 void LinkedList::Insert(int data) {
-    //If the list is empty create a Node
     Node *newNode = new Node(data);
+    // Check if the list is empty and if empty make the newNode as head and tail.
     if (head == nullptr) {
         head = newNode;
+        tail = newNode;
         return;
     }
-    else {
-        Node *temp = head;
-        //Traverse to the end of the list
-        while(temp->next != nullptr) {
-            temp = temp->next;
-        }
-        //Link the newNode to the last node in the list.
-        temp->next = newNode;
-        return;
-    }
+    // If the LinkedList is not empty, traverse to the end of the list and add the newNode
+    while(tail->next != nullptr) 
+        tail = tail->next;
+    tail->next = newNode;
 }
 
 void LinkedList::Display() {
     //Check if the list is empty.
     if (head == nullptr) {
-        cout << "List is empty" << endl;
+        std::cout  << "List is empty\n";
         return;
     }
     //Traverse to each node and display the data of the node.
     Node *temp = head;
     while (temp != nullptr) {
-        cout << temp->data << endl;
+        std::cout  << temp->data << " ";
         temp = temp->next;
     }
 }
 
 int main() {
 
-    //Object of class LinkedList.
+    // Object of class LinkedList.
     LinkedList list;
     int temp,ch;
     //Menu driven program.
     do {
-        cout << "\t\t      MENU" << endl;
-        cout << "\t\t1.Insert" << endl;
-        cout << "\t\t2.Display" << endl;
-        cout << "\t\t3.Exit" << endl;
-        cout << "Enter your choice: [  ]\b\b" << endl;
-        cin >> ch;
+        std::cout  << "\t\t      MENU\n";
+        std::cout  << "\t\t1.Insert\n";
+        std::cout  << "\t\t2.Display\n";
+        std::cout  << "\t\t3.Exit\n";
+        std::cout << "Enter your choice: [  ]\b\b";
+        std::cin >> ch;
         switch(ch) {
                 case 1:
-                    cin >> temp;
+                    std::cout << "\nEnter the element to be inserted: ";
+                    std::cin >> temp;
                     list.Insert(temp);
                 break;
                 case 2:
@@ -96,6 +95,9 @@ int main() {
                 break;
                 case 3:
                     return 0;
+                break;
+                default: 
+                    std::cout << "\nInvalid choice..!!";
                 break;
         }
     }while(ch != 3);
