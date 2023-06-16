@@ -8,29 +8,32 @@ class Node {
     public:
         int data;
         std::unique_ptr<Node> next;
+
     //Unparameterized constructor
-    Node() {
-        data = -1;
-        next = nullptr;
-    }
+    Node() : data(-1), next(nullptr) {};
+    
     //Parameterized constructor
-    Node (int data) {
-        this->data = data;
-        this->next = nullptr;
-    }
+    explicit Node (int data) : data(data), next(nullptr) {};
 };
 
   
 class LinkedList {
+
     private:
+
         std::unique_ptr<Node> head;
         std::unique_ptr<Node> tail;
+
     public:
+
         // Unparameterized constructor
         LinkedList() {
             head = nullptr;
             tail = nullptr;
         }
+        // Although there is no need to use a destructor because of the smart pointers,
+        // it is still good to have a destructor to ensure proper deallocation.
+        ~LinkedList() = default;
         /*
             // Destructor to detroy the linked list and free memory allocated the list.
             // Default destructor only deletes head (allocated by constructor).
@@ -53,13 +56,12 @@ void LinkedList::InsertAtHead(int data) {
     std::unique_ptr<Node> newNode = std::make_unique<Node>(data);
     //if the list is empty 
     if (head == nullptr) {
-        head = move(newNode);
+        head = std::move(newNode);
         return;
     }
     //if the list is not empty
-    newNode->next = move(head);
-    head = move(newNode);
-    return;
+    newNode->next = std::move(head);
+    head = std::move(newNode);
 }
 
 void LinkedList::Display() {
