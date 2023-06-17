@@ -26,11 +26,8 @@ class LinkedList {
 
     public:
 
-        // Unparameterized constructor
-        LinkedList() {
-            head = nullptr;
-            tail = nullptr;
-        }
+        // Default constructor 
+        LinkedList() : head(nullptr), tail(nullptr) {};
         // Although there is no need to use a destructor because of the smart pointers,
         // it is still good to have a destructor to ensure proper deallocation.
         ~LinkedList() = default;
@@ -80,32 +77,35 @@ void LinkedList::Display() {
 
 int main() {
 
-    //Object of class LinkedList.
-    LinkedList list;
-    int temp,ch;
-    //Menu driven program.
-    do {
-        std::cout << "\t\t      MENU\n";
-        std::cout << "\t\t1.Insert at HEAD\n";
-        std::cout << "\t\t2.Display\n";
-        std::cout << "\t\t3.Exit\n";
-        std::cout << "Enter your choice: [  ]\b\b";
-        std::cin >> ch;
-        switch(ch) {
-                case 1:
-                    std::cout << "Enter the element to insert: ";
-                    std::cin >> temp;
-                    list.InsertAtHead(temp);
-                break;
-                case 2:
-                    list.Display();
-                break;
-                case 3:
-                    return 0;
-                break;
-                default:
-                    std::cout << "\nInvalid choice..!!";
-                break;
-        }
-    }while(ch != 3);
+    {
+        //Object of class LinkedList.
+        LinkedList l;
+        int ch;
+        int temp;
+        //Menu driven program.
+        do {
+            std::cout << "\t\t      MENU\n";
+            std::cout << "\t\t1.Insert at HEAD\n";
+            std::cout << "\t\t2.Display\n";
+            std::cout << "\t\t3.Exit\n";
+            std::cout << "Enter your choice: [  ]\b\b";
+            std::cin >> ch;
+            switch(ch) {
+                    case 1:
+                        std::cout << "Enter the element to insert: ";
+                        std::cin >> temp;
+                        l.InsertAtHead(temp);
+                    break;
+                    case 2:
+                        l.Display();
+                    break;
+                    case 3:
+                        return 0;
+                    break;
+                    default:
+                        std::cout << "\nInvalid choice..!!";
+                    break;
+            }
+        }while(ch != 3);
+    }
 }
