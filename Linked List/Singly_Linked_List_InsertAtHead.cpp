@@ -30,7 +30,9 @@ class LinkedList {
         LinkedList() : head(nullptr), tail(nullptr) {};
         // Although there is no need to use a destructor because of the smart pointers,
         // it is still good to have a destructor to ensure proper deallocation.
-        ~LinkedList() = default;
+        ~LinkedList() {
+            std::cout << "\nList has been destroyed..!!";
+        }
         /*
             // Destructor to detroy the linked list and free memory allocated the list.
             // Default destructor only deletes head (allocated by constructor).
