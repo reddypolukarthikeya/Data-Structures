@@ -1,9 +1,6 @@
 #include <iostream>
 
 //Usage of namespace std is considered as bad programming practice.
-using std::cin;
-using std::cout;
-using std::endl;
 
 class Node {
     public:
@@ -18,8 +15,11 @@ class Node {
 
 class List{
     private:
+
         Node *head;
+
     public:
+
         List() : head(nullptr) {}
         //Destructor to detroy the linked list and free memory allocated the list.
         // Default destructor only deletes head (allocated by constructor).
@@ -58,13 +58,13 @@ void List::Insert(int data) {
 void List::Display() {
     //Check if the list is empty.
     if (head == nullptr) {
-        cout << "List is empty" << endl;
+        std::cout << "List is empty\n";
         return;
     }
     //If the list is not empty
     Node *temp = head;
     while (temp != nullptr) {
-        cout << temp->data << endl;
+        std::cout << temp->data << " ";
         temp = temp->next;
     }
 }
@@ -72,7 +72,7 @@ void List::Display() {
 void List::Reverse() {
     // If the list is empty
     if (head == nullptr) {
-        cout << "The list is empty" << endl;
+        std::cout << "The list is empty\n";
         return;
     }
     Node *prev = nullptr;
@@ -96,17 +96,17 @@ int main() {
     List l;
     int ch;
     do {
-        cout << "\tMenu" << endl;
-        cout << "1.Insert" << endl;
-        cout << "2.Reverse" << endl;
-        cout << "3.Display" << endl;
-        cout << "4.Exit" << endl;
-        cout << "Enter your choice: [ ]\b\b";
-        cin >> ch;
+        std::cout << "\tMenu\n";
+        std::cout << "1.Insert\n";
+        std::cout << "2.Reverse\n";
+        std::cout << "3.Display\n";
+        std::cout << "4.Exit\n";
+        std::cout << "Enter your choice: [ ]\b\b";
+        std::cin >> ch;
         switch (ch) {
             case 1:
                 int temp;
-                cin >> temp;
+                std::cin >> temp;
                 l.Insert(temp);
             break;
             case 2:
