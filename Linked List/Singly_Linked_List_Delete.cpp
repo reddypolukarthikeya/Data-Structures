@@ -62,7 +62,7 @@ void LinkedList::DeleteAtTail() {
         head = nullptr;
         return;
     }
-    //Travese to the last before node using prev and delete it's next node "curr" i.e the tail node.
+    //Traverse to the last before node using prev and delete it's next node "curr" i.e the tail node.
     Node *prev = nullptr;
     Node *curr = head;
     while(curr->next != nullptr) {
