@@ -7,23 +7,23 @@ class Node {
         int data;
         Node *next;
         // Parameterized constructor
-        Node (int data) {
-            this->data = data;
-            this->next = nullptr;
-        }
+        explicit Node (int data) : data(data), next(nullptr) {};
 };
 
 class LinkedList {
+
     private: 
+
         Node *head;
         Node *tail;
+
     public: 
         // Default constructor 
-        LinkedList () {
+        LinkedList() {
             head = nullptr;
             tail = nullptr;
         }
-        //Destructor to detroy the linked list and free memory allocated the list.
+        // Destructor to detroy the linked list and free memory allocated the list.
         // Default destructor only deletes head (allocated by constructor).
         // We need destructor to free the memory used by all individual nodes.
         ~LinkedList() {
@@ -58,12 +58,12 @@ void LinkedList::CreateLoop () {
         std::cout << "\nList is empty.";
         return;
     }
-    Node *loopNode = head->next;
-    tail->next = loopNode;
+    Node *loopnode = head;
+    tail->next = loopnode;
 }
 
 void LinkedList::Insert (int data) {
-    Node *newNode = new Node (data);
+    Node *newNode = new Node(data);
     // Check if the LinkedList is empty or not and if the LinkedList is empty, make the newNode as the head and tail.
     if (head == nullptr) {
         head = newNode;
@@ -71,9 +71,8 @@ void LinkedList::Insert (int data) {
         return;
     }
     // If the LinkedList is not empty, traverse to the end of the LinkedList.
-    while (tail->next != nullptr)
-        tail = tail->next;
     tail->next = newNode;
+    tail = tail->next;
 }
 
 void LinkedList::Display() {
@@ -83,6 +82,7 @@ void LinkedList::Display() {
         return;
     }
     Node *temp = head;
+    std::cout << "\n";
     while (temp) {
         std::cout << temp->data << " ";
         temp = temp->next;
@@ -119,7 +119,7 @@ bool LinkedList::HasLoop() {
 
 int main() {
     LinkedList l;
-    int ch;
+    int ch,temp;
     do {
         std::cout << "\n\t\tMenu";
         std::cout << "\n1.Insert";
@@ -154,4 +154,4 @@ int main() {
             break;
         }
     }while (ch != 5);
-}
+    }
