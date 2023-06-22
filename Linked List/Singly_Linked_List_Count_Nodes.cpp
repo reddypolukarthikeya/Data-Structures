@@ -1,9 +1,6 @@
 #include <iostream>
 
 // Using 'nampespace std;' is considered as bad programming practice.
-using std::cin;
-using std::cout;
-using std::endl;
 
 class Node {
     public:
@@ -34,7 +31,7 @@ class LinkedList {
                 free(temp);
                 temp = head;
             }
-            cout << endl << "List has been Destroyed...!!!";
+            std::cout << "\nList has been Destroyed...!!!";
         }
         void Insert(int data);
         int CountNodes();
@@ -45,7 +42,7 @@ int LinkedList::CountNodes() {
     Node *temp = head;
     int count =0;
     if (head == nullptr) {
-        cout << count;
+        std::cout << count;
         return -1;
     }
     while(temp != nullptr) {
@@ -76,13 +73,13 @@ void LinkedList::Insert(int data) {
 void LinkedList::Display() {
     //Check if the list is empty.
     if (head == nullptr) {
-        cout << "List is empty" << endl;
+        std::cout << "List is empty\n";
         return;
     }
     //If the list is not empty
     Node *temp = head;
     while (temp != nullptr) {
-        cout << temp->data << endl;
+        std::cout << temp->data << " ";
         temp = temp->next;
     }
 }
@@ -94,21 +91,21 @@ int main() {
     int temp,ch;
     //Menu driven program.
     do {
-        cout << "\t\t      MENU" << endl;
-        cout << "\t\t1.Insert" << endl;
-        cout << "\t\t2.Count the total number of nodes" << endl;
-        cout << "\t\t3.Display" << endl;
-        cout << "\t\t4.Exit" << endl;
-        cout << "Enter your choice: [  ]\b\b";
-        cin >> ch;
+        std::cout << "\t\t      MENU\n";
+        std::cout << "\t\t1.Insert\n";
+        std::cout << "\t\t2.Count the total number of nodes\n";
+        std::cout << "\t\t3.Display\n";
+        std::cout << "\t\t4.Exit\n";
+        std::cout << "Enter your choice: [  ]\b\b";
+        std::cin >> ch;
         switch(ch) {
                 case 1:
-                    cout << endl << "Enter the data to insert: ";
-                    cin >> temp;
+                    std::cout << "\nEnter the data to insert: ";
+                    std::cin >> temp;
                     list.Insert(temp);
                 break;
                 case 2:
-                    cout << endl << "The total number of nodes are: " << list.CountNodes() << endl;
+                    std::cout << "\nThe total number of nodes are: " << list.CountNodes() << "\n";
                 break;
                 case 3:
                     list.Display();
