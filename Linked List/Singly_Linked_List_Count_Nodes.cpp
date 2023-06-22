@@ -19,9 +19,16 @@ class Node {
 };
 
 class LinkedList {
+    private:
+        Node *head;
     public:
-        Node *head = nullptr;
-        //Destructor to detroy the linked list and free memory allocated the list.
+        int size;
+        // Unparameterized constructor
+        LinkedList() {
+            head = nullptr;
+            size = 0;
+        }
+        // Destructor to detroy the linked list and free memory allocated the list.
         // Default destructor only deletes head (allocated by constructor).
         // We need destructor to free the memory used by all individual nodes.
         ~LinkedList() {
@@ -34,30 +41,14 @@ class LinkedList {
             std::cout << "\nList has been Destroyed...!!!";
         }
         void Insert(int data);
-        int CountNodes();
         void Display();
 };
-
-int LinkedList::CountNodes() {
-    Node *temp = head;
-    int count =0;
-    if (head == nullptr) {
-        std::cout << count;
-        return -1;
-    }
-    while(temp != nullptr) {
-        temp = temp->next;
-        count++;
-    }
-    return count;
-}
 
 void LinkedList::Insert(int data) {
     //If the list is empty create a Node
     Node *newNode = new Node(data);
     if (head == nullptr) {
         head = newNode;
-        return;
     }
     else {
         Node *temp = head;
@@ -66,8 +57,11 @@ void LinkedList::Insert(int data) {
             temp = temp->next;
         }
         temp->next = newNode;
-        return;
     }
+    // Instead of creating a function which returns number of nodes 
+    // create a LinkedList variable called size which increments when 
+    // a new node is added.
+    size++;
 }
 
 void LinkedList::Display() {
@@ -87,7 +81,7 @@ void LinkedList::Display() {
 int main() {
 
     //Object of class LinkedList.
-    LinkedList list;
+    LinkedList l;
     int temp,ch;
     //Menu driven program.
     do {
@@ -102,13 +96,13 @@ int main() {
                 case 1:
                     std::cout << "\nEnter the data to insert: ";
                     std::cin >> temp;
-                    list.Insert(temp);
+                    l.Insert(temp);
                 break;
                 case 2:
-                    std::cout << "\nThe total number of nodes are: " << list.CountNodes() << "\n";
+                    std::cout << "\nThe total number of nodes are: " << l.size << "\n";
                 break;
                 case 3:
-                    list.Display();
+                    l.Display();
                 break;
                 case 4:
                     return 0;
