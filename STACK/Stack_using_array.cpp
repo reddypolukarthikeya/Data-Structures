@@ -5,7 +5,7 @@
 class Stack {
     private:
         int top;
-        int Arr[10];
+        int Arr[5];
     public:
         // Unparameterized constructor.
         Stack() {
@@ -27,7 +27,7 @@ class Stack {
 void Stack::Push(int n) {
     // Check if the stack is full.
     // Stack full condition is called "Stack Overflow".
-    if (top > 10) {
+    if (top > 5) {
         std::cout << "\nStack Overflow...!!!!";
         return;
     }
