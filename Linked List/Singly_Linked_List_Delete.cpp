@@ -7,12 +7,12 @@ class Node {
     public:
         int data;
         Node *next;
-    //Unparameterized constructor
+    // Unparameterized constructor
     Node() {
         data = -1;
         next = nullptr;
     }
-    //Parameterized constructor
+    // Parameterized constructor
     Node (int data) {
         this->data = data;
         this->next = nullptr;
@@ -101,7 +101,7 @@ void LinkedList::Display() {
         std::cout << "\nList is empty";
         return;
     }
-    //If the list is not empty
+    // If the list is not empty
     Node *temp = head;
     while (temp != nullptr) {
         std::cout << temp->data << " ";
