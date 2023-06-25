@@ -16,8 +16,20 @@ class Stack {
     private:
         Node *top;
     public:
+
         Stack () {
             top = nullptr;
+        }
+        // Destructor to detroy the linked list and free memory allocated the list.
+        // Default destructor only deletes head (allocated by constructor).
+        // We need destructor to free the memory used by all individual nodes.
+        ~Stack() {
+            Node *temp = top;
+            while (top) {
+                top = top->next;
+                delete temp;
+                temp = top;
+            }
         }
         void Push(int data);
         Node* Pop();
@@ -43,7 +55,9 @@ Node* Stack::Pop() {
     }
     Node *temp = top;
     top = top->next;
-    return temp;
+    temp->next = nullptr;
+    delete temp;
+    return top;
 }
 
 void Stack::Display() {
@@ -79,7 +93,10 @@ int main() {
                 s.Push(temp);
             break;
             case 2:
-                std::cout << "\nThe element popped out is: " << s.Pop()->data;
+                if (s.Pop())
+                    std::cout << "\nThe element popped out is: " << s.Pop()->data;
+                else 
+                    std::cout << "\nThe stack is empty..!!";
             break;
             case 3:
                 s.Display();
