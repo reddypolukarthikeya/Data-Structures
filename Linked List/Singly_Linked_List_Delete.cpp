@@ -55,18 +55,18 @@ class LinkedList {
                 d.delete is used when the memory is allocated using "new";
 */
 void LinkedList::DeleteAtTail() {
-    //if the list is empty 
+    // If the list is empty 
     if (head == nullptr) {
         std::cout << "\nThe list is empty";
         return;
     }
-    //If the list contains only one node.
+    // If the list contains only one node.
     if (head->next == nullptr) {
         delete head;
         head = nullptr;
         return;
     }
-    //Traverse to the last before node using prev and delete it's next node "curr" i.e the tail node.
+    // Traverse to the last before node using prev and delete it's next node "curr" i.e the tail node.
     Node *prev = nullptr;
     Node *curr = head;
     while(curr->next != nullptr) {
@@ -78,7 +78,7 @@ void LinkedList::DeleteAtTail() {
 }
 
 void LinkedList::Insert(int data) {
-    //If the list is empty create a Node
+    // If the list is empty create a Node
     Node *newNode = new Node(data);
     if (head == nullptr) {
         head = newNode;
@@ -86,7 +86,7 @@ void LinkedList::Insert(int data) {
     }
     else {
         Node *temp = head;
-        //Traverse to the end of the list
+        // Traverse to the end of the list
         while(temp->next != nullptr) {
             temp = temp->next;
         }
@@ -96,7 +96,7 @@ void LinkedList::Insert(int data) {
 }
 
 void LinkedList::Display() {
-    //Check if the list is empty.
+    // Check if the list is empty.
     if (head == nullptr) {
         std::cout << "\nList is empty";
         return;
@@ -111,10 +111,10 @@ void LinkedList::Display() {
 
 int main() {
 
-    //Object of class LinkedList.
+    // Object of class LinkedList.
     LinkedList list;
     int temp,ch;
-    //Menu driven program.
+    // Menu driven program.
     do {
         std::cout << "\t\t      MENU\n";
         std::cout << "\t\t1.Insert\n";
