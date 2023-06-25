@@ -1,23 +1,30 @@
 #include <iostream>
 
-// Using "namespace std" is considered as a bad programming practice.
+// Using "namespace std;" is considered as a bad programming practice.
 
 class Queue {
 
     private:
+
+        // "top" is used to insert the elements from the queue.
         int top;
+        // "front" is used to delete the elements from the queue.
         int front;
         int Arr[10];
+
     public:
         Queue() {
+            // Queue initial conditions.
             top = -1;
             front = -1;
+            Arr[10] = {0};
         }
         void Enqueue(int data);
         int Dequeue();
         void Display();
 };
 
+// Insertion operation in queue is called "Enqueue".
 void Queue::Enqueue(int data) {
     // Check if the queue is empty.
     if (front == -1) {
@@ -25,6 +32,7 @@ void Queue::Enqueue(int data) {
         front++;
         return;
     }
+    // Check if the queue is full.
     if (top > 9) {
         std::cout << "\nQueue is full.";
         return;
@@ -32,6 +40,7 @@ void Queue::Enqueue(int data) {
     Arr[++top] = data;
 }
 
+// Deletion operation in queue is called "Dequeue".
 int Queue::Dequeue() {
     // Check if the queue is empty.
     if (front == -1) {
@@ -58,6 +67,7 @@ void Queue::Display() {
 int main() {
     Queue q;
     int ch;
+    // Menu driven program.
     do {
         std::cout << "\n\tMenu";
         std::cout << "\n1.Enqueue";
