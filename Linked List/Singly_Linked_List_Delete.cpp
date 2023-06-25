@@ -23,10 +23,14 @@ class LinkedList {
 
     private:
 
-        Node *head = nullptr;
+        Node *head;
 
     public:
 
+        // Unparameterized constructor.
+        LinkedList() {
+            head = nullptr;
+        }
         // Destructor to detroy the linked list and free memory allocated the list.
         // Default destructor only deletes head (allocated by constructor).
         // We need destructor to free the memory used by all individual nodes.
