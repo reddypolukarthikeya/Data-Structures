@@ -2,9 +2,6 @@
 
 
 // Using 'nampespace std;' is considered as bad programming practice.
-using std::cin;
-using std::cout;
-using std::endl;
 
 class Node {
     public:
@@ -38,7 +35,7 @@ class List {
             }
             free(head);
             free(temp);
-            cout << endl << "The list is destroyed...!!!";
+            std::cout << "\nThe list is destroyed...!!!";
         }
         void Insert(int);
         void Display();
@@ -55,7 +52,7 @@ class List {
 void List::DeleteAtTail(){
     //Check if the list is empty or not.
     if(head == nullptr) {
-        cout << "The list is empty";
+        std::cout << "The list is empty";
         return;
     }
     Node *temp = head;
@@ -83,16 +80,16 @@ void List::Insert(int data) {
 void List::Display() {
     //Check if the list is empty or not.
     if (head == nullptr) {
-        cout << "The list is empty";
+        std::cout << "The list is empty";
         return;
     }
     Node *temp = head;
     while(temp != nullptr) {
         if(temp->next == nullptr) {
-            cout << temp->data;
+            std::cout << temp->data;
             return;
         }
-        cout << temp->data << " <=> ";
+        std::cout << temp->data << " <=> ";
         temp = temp->next;
     }
 }
@@ -101,17 +98,17 @@ int main() {
     List list;
     int ch,temp,p;
     do {    
-        cout << "\t\t         MENU" << endl;
-        cout << "1.Insert" << endl;
-        cout << "2.Delete at Tail" << endl;
-        cout << "3.Display" << endl;
-        cout << "4.Exit" << endl;
-        cout << "Enter your choice: [  ]\b\b";
-        cin >> ch;
+        std::cout << "\t\t         MENU\n";
+        std::cout << "1.Insert\n";
+        std::cout << "2.Delete at Tail\n";
+        std::cout << "3.Display\n";
+        std::cout << "4.Exit\n";
+        std::cout << "Enter your choice: [  ]\b\b";
+        std::cin>> ch;
         switch (ch) {
             case 1:
-                cout << endl << "Enter the data to insert:";
-                cin >> temp;
+                std::cout << "\nEnter the data to insert:";
+                std::cin>> temp;
                 list.Insert(temp);
             break;
             case 2:
