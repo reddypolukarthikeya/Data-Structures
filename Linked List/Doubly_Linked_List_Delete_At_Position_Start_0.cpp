@@ -1,8 +1,5 @@
 #include <iostream>
 // Using 'nampespace std;' is considered as bad programming practice.
-using std::cout;
-using std::cin;
-using std::endl;
 
 class Node {
     public:
@@ -41,7 +38,7 @@ class List {
             }
             delete head;
             delete temp;
-            cout << endl << "The object is destroyed...!!!";
+            std::cout << "\nThe object is destroyed...!!!";
         }
         void Display();
         void DeleteAtPosition(int);
@@ -50,7 +47,7 @@ class List {
 
 void List::DeleteAtPosition(int position) {
     if (position >= size) {
-        cout << endl << "Invalid Position" << endl;
+        std::cout << "\nInvalid Position";
         return;
     }
     Node* temp = head;
@@ -91,16 +88,16 @@ void List::Insert(int data) {
 void List::Display() {
     //Check if the list is empty or not.
     if (head == nullptr) {
-        cout << "The list is empty";
+        std::cout << "The list is empty";
         return;
     }
     Node *temp = head;
     while(temp != nullptr) {
         if(temp->next == nullptr) {
-            cout << temp->data;
+            std::cout << temp->data;
             return;
         }
-        cout << temp->data << " <=> ";
+        std::cout << temp->data << " <=> ";
         temp = temp->next;
     }
 }
@@ -109,20 +106,20 @@ int main() {
     List list;
     int ch,temp,p;
     do {
-        cout << endl << "\t\t         MENU" << endl;
-        cout << "1.Insert" << endl << "2.Delete at POSITION" << endl;
-        cout << "3.Display" << endl << "4.Exit" << endl;
-        cout << "\n\tEnter your choice: [  ]\b\b\b";
-        cin >> ch;
+        std::cout << "\n\t\t         MENU\n";
+        std::cout << "1.Insert" << "\n2.Delete at POSITION\n";
+        std::cout << "3.Display\n" << "4.Exit\n";
+        std::cout << "\n\tEnter your choice: [  ]\b\b\b";
+        std::cin>> ch;
         switch (ch) {
             case 1:
-                cout << endl << "Enter the element to insert: ";
-                cin >> temp;
+                std::cout << "\nEnter the element to insert: ";
+                std::cin>> temp;
                 list.Insert(temp);
             break;
             case 2:
-                cout << endl << "Enter the position to delete: ";
-                cin >> p;
+                std::cout << "\nEnter the position to delete: ";
+                std::cin>> p;
                 list.DeleteAtPosition(p);
             break;
             case 3:
@@ -132,7 +129,7 @@ int main() {
                 return 0;
             break;
             default:
-                cout << "Invalid choice..!!";
+                std::cout << "Invalid choice..!!";
             break;
         }
     }while(ch != 4);
