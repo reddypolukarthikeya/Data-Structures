@@ -24,12 +24,14 @@ class LinkedList {
     private:
 
         Node *head;
+        Node *tail;
 
     public:
 
         // Unparameterized constructor.
         LinkedList() {
             head = nullptr;
+            tail = nullptr;
         }
         // Destructor to detroy the linked list and free memory allocated the list.
         // Default destructor only deletes head (allocated by constructor).
@@ -82,17 +84,11 @@ void LinkedList::Insert(int data) {
     Node *newNode = new Node(data);
     if (head == nullptr) {
         head = newNode;
+        tail = newNode;
         return;
     }
-    else {
-        Node *temp = head;
-        // Traverse to the end of the list
-        while(temp->next != nullptr) {
-            temp = temp->next;
-        }
-        temp->next = newNode;
-        return;
-    }
+    tail->next = newNode;
+    tail = newNode;    
 }
 
 void LinkedList::Display() {
@@ -103,8 +99,8 @@ void LinkedList::Display() {
     }
     // If the list is not empty
     Node *temp = head;
-    while (temp != nullptr) {
-        std::cout << temp->data << " ";
+    while (temp) {
+        std::cout << temp->data << " => ";
         temp = temp->next;
     }
 }
@@ -112,32 +108,11 @@ void LinkedList::Display() {
 int main() {
 
     // Object of class LinkedList.
-    LinkedList list;
-    int temp,ch;
-    // Menu driven program.
-    do {
-        std::cout << "\t\t      MENU\n";
-        std::cout << "\t\t1.Insert\n";
-        std::cout << "\t\t2.Delete at TAIL\n";
-        std::cout << "\t\t3.Display\n";
-        std::cout << "\t\t4.Exit\n";
-        std::cout << "Enter your choice: [  ]\b\b";
-        std::cin >> ch;
-        switch(ch) {
-                case 1:
-                    std::cout << "\nEnter the data to insert: ";
-                    std::cin >> temp;
-                    list.Insert(temp);
-                break;
-                case 2:
-                    list.DeleteAtTail();
-                break;
-                case 3:
-                    list.Display();
-                break;
-                case 4:
-                    return 0;
-                break;
-        }
-    }while(ch != 4);
+    LinkedList l;
+    l.Insert(1);
+    l.Insert(2);
+    l.Insert(3);
+    l.Insert(4);
+    l.Insert(5);
+    l.Display();
 }
