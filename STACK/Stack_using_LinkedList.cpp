@@ -53,10 +53,7 @@ Node* Stack::Pop() {
         std::cout << "Stack is empty..!\n";
         return nullptr;
     }
-    Node *temp = top;
     top = top->next;
-    temp->next = nullptr;
-    delete temp;
     return top;
 }
 
