@@ -32,7 +32,7 @@ class Stack {
             }
         }
         void Push(int data);
-        Node* Pop();
+        int Pop();
         void Display();
 };
 
@@ -47,20 +47,21 @@ void Stack::Push(int data) {
     top = newNode;
 }
 
-Node* Stack::Pop() {
+int Stack::Pop() {
     // Check if the stack is empty.
     if (top == nullptr) {
-        std::cout << "Stack is empty..!\n";
-        return nullptr;
+        std::cout << "\nStack is empty\n";
+        return -1;
     }
+    Node *temp = top;
     top = top->next;
-    return top;
+    return temp->data;
 }
 
 void Stack::Display() {
     // Check if the stack is empty.
     if (top == nullptr) {
-        std::cout << "Stack is empty..!\n";
+        std::cout << "\nStack is empty..!\n";
         return;
     }
     std::cout << "\n";
@@ -73,7 +74,7 @@ void Stack::Display() {
 
 int main() {
     Stack s;
-    int ch,temp;
+    int ch, temp;
     // Menu driven program.
     do {
         std::cout << "\n\t\tMenu";
@@ -90,10 +91,7 @@ int main() {
                 s.Push(temp);
             break;
             case 2:
-                if (s.Pop())
-                    std::cout << "\nThe element popped out is: " << s.Pop()->data;
-                else 
-                    std::cout << "\nThe stack is empty..!!";
+                std::cout << "\nElement popped out is : " << s.Pop();
             break;
             case 3:
                 s.Display();
