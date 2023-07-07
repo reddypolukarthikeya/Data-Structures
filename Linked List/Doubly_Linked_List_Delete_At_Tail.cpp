@@ -1,6 +1,5 @@
 #include <iostream>
 
-
 // Using 'nampespace std;' is considered as bad programming practice.
 
 class Node {
@@ -8,11 +7,13 @@ class Node {
         Node *prev;
         int data;
         Node *next;
+        // Unparameterized constructor.
         Node() {
             prev = nullptr;
             data = -1;
             next = nullptr;
         }
+        // Parameterized constructor.
         Node (int data) {
             prev = nullptr;
             this->data = data;
@@ -20,21 +21,30 @@ class Node {
         }
 };
 
-class List {
+class LinkedList {
+
     private:
-        Node *head = nullptr;
+
+        Node *head;
+        Node *tail;
+
     public:
+
+        LinkedList() {
+            head = nullptr;
+            tail = nullptr;
+        }
+        // Destructor to detroy the linked list and free memory allocated the list.
         // Default destructor only deletes head (allocated by constructor).
         // We need destructor to free the memory used by all individual nodes.
-        ~List() {
+        ~LinkedList() {
             Node *temp = head;
             while(head != nullptr) {
                 head = head->next;
-                free (temp);
+                delete temp;
                 temp = head;
             }
-            free(head);
-            free(temp);
+            delete head;
             std::cout << "\nThe list is destroyed...!!!";
         }
         void Insert(int);
@@ -42,63 +52,64 @@ class List {
         void DeleteAtTail();
 };
 
-/*NOTE:- ->HERE DELETION MEANS POINTING TO THE NEXT->NEXT NODE AND NOT ACTUALLY DELETING THE NODE. 
-         ->Reasons for not using free() and delete() :
-                a.Using free() to deallocate memory allocated for an object in C++ is not recommended because 
-                  it does not call the object's destructor.
+/*NOTE:-    ->Reasons for not using free() :
+                a.Using free() to deallocate memory allocated for an object in C++ is not recommended because it does not call the object's destructor.
                 b.When executed, a "SEGMENTATION FAULT" will occur.
-         ->In the end thats why a destructor is added to destroy the memory used and free the allocated memory.
+                c.free() can only be used to deallocate memory that has been allocated using "malloc()" and "calloc()".
+                d.delete is used when the memory is allocated using "new";
 */
-void List::DeleteAtTail(){
-    //Check if the list is empty or not.
+void LinkedList::DeleteAtTail(){
+    // Check if the list is empty or not.
     if(head == nullptr) {
-        std::cout << "The list is empty";
+        std::cout << "\nThe list is empty";
         return;
     }
-    Node *temp = head;
-    while(temp->next != nullptr) 
-        temp = temp->next;
-    temp = temp->prev;
-    temp->next = nullptr;
+    else if (tail == head) {
+        head = nullptr;
+        tail = nullptr;
+        return;
+    }
+    Node *temp = tail;
+    tail = tail->prev;
+    tail->next = nullptr;
+    delete temp;
+    return;
+    
 }
 
-void List::Insert(int data) {
+void LinkedList::Insert(int data) {
     Node *newNode = new Node(data);
-    //Check if the list is empty or not and if the list is empty, make the newNode as head of the list.
+    // Check if the list is empty or not and if the list is empty, make the newNode as head of the list.
     if (head == nullptr) {
         head = newNode;
+        tail = newNode;
         return;
     }
-    //If not empty, traverse to the end of the list.
-    Node *temp = head;
-    while (temp->next != nullptr)
-        temp = temp->next;
-    temp->next = newNode;
-    newNode->prev = temp;
+    // If not empty, update the tail node as the newNode.
+    tail->next = newNode;
+    newNode->prev = tail;
+    tail = newNode;
 }
 
-void List::Display() {
-    //Check if the list is empty or not.
+void LinkedList::Display() {
+    // Check if the list is empty or not.
     if (head == nullptr) {
         std::cout << "The list is empty";
         return;
     }
     Node *temp = head;
-    while(temp != nullptr) {
-        if(temp->next == nullptr) {
-            std::cout << temp->data;
-            return;
-        }
+    while(temp) { 
         std::cout << temp->data << " <=> ";
         temp = temp->next;
     }
 }
 
 int main() {
-    List list;
+    LinkedList l;
     int ch,temp,p;
+    // Menu driven program.
     do {    
-        std::cout << "\t\t         MENU\n";
+        std::cout << "\n\t\t         MENU\n";
         std::cout << "1.Insert\n";
         std::cout << "2.Delete at Tail\n";
         std::cout << "3.Display\n";
@@ -109,12 +120,13 @@ int main() {
             case 1:
                 std::cout << "\nEnter the data to insert:";
                 std::cin>> temp;
-                list.Insert(temp);
+                l.Insert(temp);
             break;
             case 2:
-                list.DeleteAtTail();
+                l.DeleteAtTail();
+            break;
             case 3:
-                list.Display();
+                l.Display();
             break;
             case 4:
                 return 0;
