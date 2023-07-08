@@ -18,23 +18,21 @@ class Node {
     }
     // Desstructor to destroy the nodes and free memory allocated to the nodes.
     ~Node() {
-        std::cout  << "\nAll the node have been destroyed..!!";
+        std::cout  << "\nNode has been deallocated..!!";
     }
 };
-
   
 class LinkedList {
 
     private:
 
         Node *head;
-        Node *tail;
 
     public:
 
+        // Unaparameterized constructor.
         LinkedList() {
             head = nullptr;
-            tail = nullptr;
         }
         // Destructor to detroy the linked list and free memory allocated the list.
         // Default destructor only deletes head (allocated by constructor).
@@ -99,9 +97,14 @@ int LinkedList::CountNodes() {
         d.delete is used when the memory is allocated using "new";
 */
 void LinkedList::DeleteAtHead() {
-    // Deleting head meaning moving the head to the next node.
+    // Check if the list is empty.
+    if (head == nullptr) {
+        std::cout << "\nList is empty.";
+        return;
+    }
+    Node *temp = head;
     head = head->next;
-    head = head->next;
+    delete temp;
 }
 
 void LinkedList::DeleteAtPosition(int position) {
@@ -176,14 +179,16 @@ void LinkedList::Insert(int data) {
     Node *newNode = new Node(data);
     if (head == nullptr) {
         head = newNode;
-        tail = newNode;
         return;
     }
-    tail->next = newNode;
-    tail = tail->next;
+    Node *temp = head;
+    while (temp->next) 
+        temp = temp->next;
+    temp->next = newNode;
 }
 
 void LinkedList::Display() {
+    // Check if the list is empty.
     if (head == nullptr) {
         std::cout  << "\nList is empty";
         return;
@@ -219,15 +224,19 @@ int main() {
         std::cin >> ch;
         switch(ch) { 
             case 1:
+                std::cout << "\nEnter the element to insert at head: ";
                 std::cin >> temp;
                 l.InsertAtHead(temp);
             break;
             case 2:
                 std::cin >> temp;
+                std::cout << "\nEnter the element to insert at tail : ";
                 l.Insert(temp);
             break;
             case 3:
+                std::cout << "\nEnter the element to insert at position : ";
                 std::cin >> temp;
+                std::cout << "\nEnter the position to insert : ";
                 std::cin >> position;
                 l.InsertAtPosition(temp, position);
             break;
