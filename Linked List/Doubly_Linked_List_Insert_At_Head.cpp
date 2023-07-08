@@ -1,10 +1,6 @@
 #include <iostream>
 
-
 // Using 'nampespace std;' is considered as bad programming practice.
-using std::cin;
-using std::cout;
-using std::endl;
 
 class Node {
     public:
@@ -54,7 +50,7 @@ class LinkedList {
                 temp = head;
             }
             delete head;
-            cout << endl << "The list is destroyed...!!!";
+            std::cout << "\nThe list is destroyed...!!!";
         }
         void Display();
         void InsertAtHead(int);
@@ -75,16 +71,16 @@ void LinkedList::InsertAtHead(int data) {
 void LinkedList::Display() {
     // Check if the list is empty or not.
     if (head == nullptr) {
-        cout << "The list is empty";
+        std::cout << "\nThe list is empty";
         return;
     }
     Node *temp = head;
     while(temp != nullptr) {
         if(temp->next == nullptr) {
-            cout << temp->data;
+            std::cout << temp->data;
             return;
         }
-        cout << temp->data << " <=> ";
+        std::cout << temp->data << " <=> ";
         temp = temp->next;
     }
 }
@@ -94,16 +90,16 @@ int main() {
     // Menu driven program.
     int ch,temp,p;
     do {    
-        cout << "\t\t         MENU" << endl;
-        cout << "1.Insert at HEAD" << endl;
-        cout << "2.Display" << endl;
-        cout << "3.Exit" << endl;
-        cout << "Enter your choice: [  ]\b\b";
-        cin >> ch;
+        std::cout << "\n\t\t         MENU";
+        std::cout << "\n1.Insert at HEAD";
+        std::cout << "\n2.Display";
+        std::cout << "\n3.Exit";
+        std::cout << "\nEnter your choice: [  ]\b\b";
+        std::cin >> ch;
         switch (ch) {
             case 1:
-                cout << endl << "Enter the data to insert:";
-                cin >> temp;
+                std::cout << "\nEnter the data to insert:";
+                std::cin >> temp;
                 l.InsertAtHead(temp);
             break;
             case 2:
