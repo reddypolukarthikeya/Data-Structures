@@ -1,9 +1,6 @@
 #include <iostream>
 
 // Using 'nampespace std;' is considered as bad programming practice.
-using std::cin;
-using std::cout;
-using std::endl;
 
 class Node {
     public:
@@ -22,22 +19,27 @@ class Node {
         }
 };
 
-class List {
+class LinkedList {
+
     private:
-        Node *head = nullptr;
+
+        Node *head;
+
     public:
-        // Default destructor only deletes head (allocated by constructor).
-        // We need destructor to free the memory used by all individual nodes.
-        ~List() {
+
+        // Unparameterized constructor.
+        LinkedList () {
+            head = nullptr;
+        }
+        ~LinkedList() {
             Node *temp = head;
             while(head != nullptr) {
                 head = head->next;
                 free (temp);
                 temp = head;
             }
-            free(head);
-            free(temp);
-            cout << endl << "The object is destroyed...!!!";
+            delete head;
+            std::cout << "\nThe object is destroyed...!!!";
         }
         int CountNodes();
         void Display();
@@ -53,9 +55,9 @@ class List {
 };
 
 //This function actually performs the reverse function.
-void List::Reverse() {
+void LinkedList::Reverse() {
     if (head == nullptr){
-        cout << "The list is empty...!!!" << endl;
+        std::cout << "\nThe list is empty...!!!";
         return;
     }
     Node *temp = nullptr;
@@ -72,29 +74,29 @@ void List::Reverse() {
 }
 
 //Note:- This function does not reverse the linked instead it just prints in reverse order.
-void List::ReverseDispaly() {
+void LinkedList::ReverseDispaly() {
     if (head == nullptr) {
-        cout << "The list is empty...!!!" << endl;
+        std::cout << "\nThe list is empty...!!!";
         return;
     }
     Node *temp = head;
     while(temp->next != nullptr) 
         temp = temp->next;
     while(temp != nullptr) {
-        cout << temp->data << " ";
+        std::cout << temp->data << " ";
         temp = temp->prev;
     }
 }
 
-void List::DeleteAtPosition(int position) {
+void LinkedList::DeleteAtPosition(int position) {
     // Check if the given positon is valid or not.
     if (position > CountNodes()) {
-        cout << "Invalid position" << endl;
+        std::cout << "\nInvalid position.";
         return;
     }
     // Check if the list is empty or not.
     if(head == nullptr) 
-        cout << "The list is empty..!!" << endl;
+        std::cout << "\nThe list is empty..!!";
     if (position == 1) {
         DeleteAtHead();
         return;
@@ -115,10 +117,10 @@ void List::DeleteAtPosition(int position) {
     temp->prev = temp->prev->prev;
 }  
 
-int List::CountNodes() {
+int LinkedList::CountNodes() {
     //Check if the list is empty or not.
     if (head == nullptr) {
-        cout << "The list is empty" << endl;
+        std::cout << "\nThe list is empty";
         return 0;
     }
     int count=0;
@@ -130,17 +132,17 @@ int List::CountNodes() {
     return count;
 }
 
-void List::DeleteAtHead() {
+void LinkedList::DeleteAtHead() {
     //Check if the list is empty or not.
     if (head == nullptr) {
-        cout << "The list is empty";
+        std::cout << "\nThe list is empty";
         return;
     }
     head = head->next;
     head->prev = nullptr;
 }
 
-void List::InsertAtPosition(int data, int position) {
+void LinkedList::InsertAtPosition(int data, int position) {
     Node *newNode = new Node(data);
     //Check if the list is empty and if emtpy make the newNode as head node of the list.
     if(head == nullptr) {
@@ -162,7 +164,7 @@ void List::InsertAtPosition(int data, int position) {
     temp->next = newNode;
 }
 
-void List::InsertAtHead(int data) {
+void LinkedList::InsertAtHead(int data) {
     Node *newNode = new Node(data);
     //Check if the list is empty and if the list is empty make the newNode as the head of the list.
     if(head == nullptr) {
@@ -174,10 +176,10 @@ void List::InsertAtHead(int data) {
     head = newNode;
 }
 
-void List::DeleteAtTail() {
+void LinkedList::DeleteAtTail() {
     //Check if the list is empty or not.
     if(head == nullptr) {
-        cout << "The list is empty";
+        std::cout << "\nThe list is empty";
         return;
     }
     Node *temp = head;
@@ -187,7 +189,7 @@ void List::DeleteAtTail() {
     temp->next = nullptr;
 }
 
-void List::Insert(int data) {
+void LinkedList::Insert(int data) {
     Node *newNode = new Node(data);
     //Check if the list is empty or not and if the list is empty, make the newNode as head of the list.
     if (head == nullptr) {
@@ -202,59 +204,59 @@ void List::Insert(int data) {
     newNode->prev = temp;
 }
 
-void List::Display() {
+void LinkedList::Display() {
     //Check if the list is empty or not.
     if (head == nullptr) {
-        cout << "The list is empty";
+        std::cout << "\nThe list is empty";
         return;
     }
     Node *temp = head;
     while(temp != nullptr) {
         if(temp->next == nullptr) {
-            cout << temp->data;
+            std::cout << temp->data;
             return;
         }
-        cout << temp->data << " <=> ";
+        std::cout << temp->data << " <=> ";
         temp = temp->next;
     }
 }
 
 int main() {
-    List list;
+    LinkedList list;
     int ch,temp,p;
     do {
-        cout << "\t\t         MENU" << endl;
-        cout << "1.Insert" << endl << "2.Inset at Head" << endl;
-        cout << "3.Insert at Position" << endl;
-        cout << "4.Delete at Tail" << endl;
-        cout << "5.Delete at Position" << endl;
-        cout << "6.Delete at Head" << endl;
-        cout << "7.Reverse" << endl;
-        cout << "8.Reverse Display" << endl;
-        cout << "9.Display" << endl;
-        cout << "99.Exit" << endl;
-        cout << "\n\tEnter your choice: [  ]\b\b\b";
-        cin >> ch;
+        std::cout << "\n\t\t         MENU";
+        std::cout << "\n1.Insert" << "2.Inset at Head";
+        std::cout << "\n3.Insert at Position";
+        std::cout << "\n4.Delete at Tail";
+        std::cout << "\n5.Delete at Position";
+        std::cout << "\n6.Delete at Head";
+        std::cout << "\n7.Reverse";
+        std::cout << "\n8.Reverse Display";
+        std::cout << "\n9.Display";
+        std::cout << "\n99.Exit";
+        std::cout << "\n\tEnter your choice: [  ]\b\b\b";
+        std::cin >> ch;
         switch (ch) {
             case 1:
-                cin >> temp;
+                std::cin >> temp;
                 list.Insert(temp);
             break;
             case 2:
-                cin >> temp;
+                std::cin >> temp;
                 list.InsertAtHead(temp);
             break;
             case 3:
-                cin >> temp;
-                cout << endl << "Enter the position to insert: ";
+                std::cin >> temp;
+                std::cout << "\nEnter the position to insert: ";
                 list.InsertAtPosition(temp,p);
             break;
             case 4:
                 list.DeleteAtTail();
             break;
             case 5:
-                cout << endl << "Enter the position to delete: ";
-                cin >> p;
+                std::cout << "\nEnter the position to delete: ";
+                std::cin >> p;
                 list.DeleteAtPosition(p);
             break;
             case 6:
