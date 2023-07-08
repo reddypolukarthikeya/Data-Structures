@@ -33,6 +33,14 @@ class LinkedList {
         // Destructor to detroy the linked list and free memory allocated the list.
         // Default destructor only deletes head (allocated by constructor).
         // We need destructor to free the memory used by all individual nodes.
+/*NOTE:-
+         ->Reasons for not using free() :
+                a.Using free() to deallocate memory allocated for an object in C++ is not recommended because it 
+                  does not call the object's destructor.
+                b.When executed, a "SEGMENTATION FAULT" will occur.
+                c.free() can only be used to deallocate memory that has been allocated using "malloc()" and "calloc()".
+                d.delete is used when the memory is allocated using "new";
+*/
         ~LinkedList() {
             Node *temp = head;
             while(head != nullptr) {
