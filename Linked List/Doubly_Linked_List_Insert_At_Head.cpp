@@ -23,13 +23,30 @@ class Node {
         }
 };
 
-class List {
+class LinkedList {
+
     private:
-        Node *head = nullptr;
+
+        Node *head;
+
     public:
+
+        LinkedList () {
+            head = nullptr;
+        }
+        // Destructor to detroy the linked list and free memory allocated the list.
         // Default destructor only deletes head (allocated by constructor).
         // We need destructor to free the memory used by all individual nodes.
-        ~List() {
+/*NOTE:-
+    ->Reasons for not using free() :
+        a.Using free() to deallocate memory allocated for an object in C++ is not recommended because
+          it does not call the object's destructor.
+        b.When executed, a "SEGMENTATION FAULT" will occur.
+        c.free() can only be used to deallocate memory that has been allocated using "malloc()" and "calloc()".
+        d.delete is used when the memory is allocated using "new";
+*/
+
+        ~LinkedList() {
             Node *temp = head;
             while(head != nullptr) {
                 head = head->next;
@@ -37,16 +54,15 @@ class List {
                 temp = head;
             }
             delete head;
-            delete temp;
             cout << endl << "The list is destroyed...!!!";
         }
         void Display();
         void InsertAtHead(int);
 };
 
-void List::InsertAtHead(int data) {
+void LinkedList::InsertAtHead(int data) {
     Node *newNode = new Node(data);
-    //Check if the list is empty and if the list is empty make the newNode as the head of the list.
+    // Check if the list is empty and if the list is empty make the newNode as the head of the list.
     if(head == nullptr) {
         head = newNode;
         return;
@@ -56,8 +72,8 @@ void List::InsertAtHead(int data) {
     head = newNode;
 }
 
-void List::Display() {
-    //Check if the list is empty or not.
+void LinkedList::Display() {
+    // Check if the list is empty or not.
     if (head == nullptr) {
         cout << "The list is empty";
         return;
@@ -74,7 +90,8 @@ void List::Display() {
 }
 
 int main() {
-    List list;
+    LinkedList l;
+    // Menu driven program.
     int ch,temp,p;
     do {    
         cout << "\t\t         MENU" << endl;
@@ -87,10 +104,10 @@ int main() {
             case 1:
                 cout << endl << "Enter the data to insert:";
                 cin >> temp;
-                list.InsertAtHead(temp);
+                l.InsertAtHead(temp);
             break;
             case 2:
-                list.Display();
+                l.Display();
             break;
             case 3:
                 return 0;
