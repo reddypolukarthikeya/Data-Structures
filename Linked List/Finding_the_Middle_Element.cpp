@@ -98,6 +98,9 @@ int main() {
             case 3: 
                 return 0;
             break;
+            default:
+                std::cout << "\nInvalid choice..!!";
+            break;
         }
     }while (ch!= 3);
 }
