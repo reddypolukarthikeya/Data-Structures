@@ -6,12 +6,12 @@ class Node {
     public:
         int data;
         Node *next;
-    //Unparameterized constructor
+    // Unparameterized constructor
     Node() {
         data = -1;
         next = nullptr;
     }
-    //Parameterized constructor
+    // Parameterized constructor
     Node (int data) {
         this->data = data;
         this->next = nullptr;
@@ -19,23 +19,37 @@ class Node {
 };
 
 class LinkedList {
+
     private:
+
         Node *head;
+        Node *tail;
+
     public:
+
         int size;
         // Unparameterized constructor
         LinkedList() {
             head = nullptr;
+            tail = nullptr;
             size = 0;
         }
         // Destructor to detroy the linked list and free memory allocated the list.
         // Default destructor only deletes head (allocated by constructor).
         // We need destructor to free the memory used by all individual nodes.
+/*NOTE:-
+    ->Reasons for not using free() :
+        a.Using free() to deallocate memory allocated for an object in C++ is not recommended because it 
+          does not call the object's destructor.
+        b.When executed, a "SEGMENTATION FAULT" will occur.
+        c.free() can only be used to deallocate memory that has been allocated using "malloc()" and "calloc()".
+        d.delete is used when the memory is allocated using "new";
+*/
         ~LinkedList() {
             Node *temp = head;
             while(head != nullptr) {
                 head = head->next;
-                free(temp);
+                delete temp;
                 temp = head;
             }
             std::cout << "\nList has been Destroyed...!!!";
@@ -45,32 +59,31 @@ class LinkedList {
 };
 
 void LinkedList::Insert(int data) {
-    //If the list is empty create a Node
+    // If the list is empty create a Node
     Node *newNode = new Node(data);
     if (head == nullptr) {
         head = newNode;
+        tail = newNode;
     }
     else {
-        Node *temp = head;
-        //Traverse to the end of the list
-        while(temp->next != nullptr) {
-            temp = temp->next;
-        }
-        temp->next = newNode;
+        tail->next = newNode;
+        tail = tail->next;
     }
-    // Instead of creating a function which returns number of nodes 
-    // create a LinkedList variable called size which increments when 
-    // a new node is added.
+    /*
+        Instead of creating a function which returns number of nodes
+        create a LinkedList variable called size which increments when 
+        a new node is added.
+    */
     size++;
 }
 
 void LinkedList::Display() {
-    //Check if the list is empty.
+    // Check if the list is empty.
     if (head == nullptr) {
         std::cout << "List is empty\n";
         return;
     }
-    //If the list is not empty
+    // If the list is not empty
     Node *temp = head;
     while (temp != nullptr) {
         std::cout << temp->data << " ";
@@ -80,10 +93,10 @@ void LinkedList::Display() {
 
 int main() {
 
-    //Object of class LinkedList.
+    // Object of class LinkedList.
     LinkedList l;
     int temp,ch;
-    //Menu driven program.
+    // Menu driven program.
     do {
         std::cout << "\t\t      MENU\n";
         std::cout << "\t\t1.Insert\n";
