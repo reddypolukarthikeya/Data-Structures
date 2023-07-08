@@ -1,9 +1,6 @@
 #include <iostream>
 
 // Using 'namespace std; ' is considered as bad programing practice.
-using std::cin;
-using std::cout;
-using std::endl;
 
 class Node {
     public: 
@@ -17,14 +14,14 @@ class Node {
         }
 };
 
-class List {
+class LinkedList {
     private:
         Node *head;
     public:
-        List () {
+        LinkedList () {
             head = nullptr;
         }
-        ~List () {
+        ~LinkedList () {
             Node *temp = head;
             while (head) {
                 head = head->next;
@@ -33,14 +30,14 @@ class List {
             }
             delete head;
             delete temp;
-            cout << endl << "The list is destroyed." << endl;
+            std::cout  << "\nThe list is destroyed.";
         }
         void Insert(int data);
         void Display();
         void Reverse();
 };
 
-void List::Insert(int data) {
+void LinkedList::Insert(int data) {
     Node *newNode = new Node(data);
     // Check if the list is empty or not and if the list is empty make the newNode as head of the list.
     if (head == nullptr) {
@@ -56,27 +53,27 @@ void List::Insert(int data) {
     newNode->prev = temp;
 }
 
-void List::Display() {
+void LinkedList::Display() {
     // Check if the list is empty.
     if (head == nullptr) {
-        cout<< endl << "The list is empty." << endl;
+        std::cout <<  "\nThe list is empty.";
         return;
     }
     Node *temp = head;
     while (temp) {
         if (temp->next == nullptr) {
-            cout << temp->data;
+            std::cout  << temp->data;
             return;
         }
-        cout << temp->data << " <=> ";
+        std::cout  << temp->data << " <=> ";
         temp = temp->next;
     }
 }
 
-void List::Reverse () {
+void LinkedList::Reverse () {
     // Check if the list is empty.
     if (head == nullptr) {
-        cout << "The list is empty." << endl;
+        std::cout  << "\nThe list is empty.";
         return;
     }
     Node *current = head;
@@ -91,21 +88,21 @@ void List::Reverse () {
 }
 
 int main() {
-    List l;
+    LinkedList l;
     int ch;
     do {
-        cout << endl << "\t MENU " << endl;
-        cout << "1.Insert" << endl;
-        cout << "2.Reverse" << endl;
-        cout << "3.Display" << endl;
-        cout << "4.EXIT" << endl;
-        cout << "Enter your choice :[ ]\b\b";
-        cin >> ch;
+        std::cout  << "\n\t MENU ";
+        std::cout  << "\n1.Insert";
+        std::cout  << "\n2.Reverse";
+        std::cout  << "\n3.Display";
+        std::cout  << "\n4.EXIT";
+        std::cout  << "\nEnter your choice :[ ]\b\b";
+        std::cin >> ch;
         switch(ch) {
             case 1:
                 int temp;
-                cout << endl << "Enter the element to insert: ";
-                cin >> temp;
+                std::cout  <<  "\nEnter the element to insert: ";
+                std::cin >> temp;
                 l.Insert(temp);
             break;
             case 2: 
