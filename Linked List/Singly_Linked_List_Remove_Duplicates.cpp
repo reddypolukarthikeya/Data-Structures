@@ -1,9 +1,6 @@
 #include <iostream>
 
 // Using 'nampespace std;' is considered as bad programming practice.
-using std::cin;
-using std::cout;
-using std::endl;
 
 class Node {
     public:
@@ -22,11 +19,29 @@ class Node {
 };
   
 class LinkedList {
+    
+    private:
+        Node *head;
+        Node *tail;
+
     public:
-        Node *head = nullptr;
-        //Destructor to detroy the linked list and free memory allocated the list.
+        
+        // Unparameterized constructor.
+        LinkedList() {
+            head = nullptr;
+            tail = nullptr;
+        }
+        // Destructor to detroy the linked list and free memory allocated the list.
         // Default destructor only deletes head (allocated by constructor).
         // We need destructor to free the memory used by all individual nodes.
+/*NOTE:-
+    ->Reasons for not using free() :
+        a.Using free() to deallocate memory allocated for an object in C++ is not recommended because 
+            it does not call the object's destructor.
+        b.When executed, a "SEGMENTATION FAULT" will occur.
+        c.free() can only be used to deallocate memory that has been allocated using "malloc()" and "calloc()".
+        d.delete is used when the memory is allocated using "new";
+*/
         ~LinkedList() {
             Node *temp = head;
             while(head != nullptr) {
@@ -34,7 +49,7 @@ class LinkedList {
                 delete temp;
                 temp = head;
             }
-            cout << endl << "List has been Destroyed...!!!";
+            std::cout << "\nList has been Destroyed...!!!";
         }
         void Insert(int data);
         void RemoveDuplicates();
@@ -42,41 +57,37 @@ class LinkedList {
 };
 
 void LinkedList::Insert(int data) {
-    //If the list is empty create a Node
+    // If the list is empty create a Node
     Node *newNode = new Node(data);
     if (head == nullptr) {
         head = newNode;
+        tail = newNode;
         return;
     }
-    Node *temp = head;  
-    //Traverse to the end of the list
-    while(temp->next != nullptr) {
-        temp = temp->next;
-    }
-    temp->next = newNode;
+    tail->next = newNode;
+    tail = tail->next;
 }
 
 void LinkedList::Display() {
-    //Check if the list is empty.
+    // Check if the list is empty.
     if (head == nullptr) {
-        cout << "List is empty" << endl;
+        std::cout << "\nList is empty";
         return;
     }
-    //If the list is not empty
+    // If the list is not empty
     Node *temp = head;
     while (temp != nullptr) {
-        cout << temp->data << endl;
+        std::cout << temp->data <<  " ";
         temp = temp->next;
     }
-    delete temp;
 }
 
 void LinkedList::RemoveDuplicates() {
-    //Check if the list is empty.
+    // Check if the list is empty.
     if (head == nullptr) 
         return;
     Node *temp = head;
-    //If the data of the current node is equal to the data of the next node then remove the next node.
+    // If the data of the current node is equal to the data of the next node then remove the next node.
     while (temp->next != nullptr) {
         if (temp->data == temp->next->data) {
             temp->next = temp->next->next;
@@ -87,30 +98,29 @@ void LinkedList::RemoveDuplicates() {
 }
 
 int main() {
-
-    //Object of class LinkedList.
-    LinkedList list;
+    // Object of class LinkedList.
+    LinkedList l;
     int temp,ch;
-    //Menu driven program.
+    // Menu driven program.
     do {
-        cout << "\t\t      MENU" << endl;
-        cout << "\t\t1.Insert" << endl;
-        cout << "\t\t2.Remove Duplicates" << endl;
-        cout << "\t\t3.Display" << endl;
-        cout << "\t\t4.Exit" << endl;
-        cout << "Enter your choice: [  ]\b\b";
-        cin >> ch;
+        std::cout << "\n\t\t      MENU";
+        std::cout << "\n\t\t1.Insert";
+        std::cout<< "\n\t\t2.Remove Duplicates";
+        std::cout<< "\n\t\t3.Display";
+        std::cout<< "\n\t\t4.Exit";
+        std::cout<< "\nEnter your choice: [  ]\b\b";
+        std::cin>> ch;
         switch(ch) {
                 case 1:
-                    cout << endl << "Enter the data to insert: ";
-                    cin >> temp;
-                    list.Insert(temp);
+                    std::cout<< "\nEnter the data to insert: ";
+                    std::cin>> temp;
+                    l.Insert(temp);
                 break;
                 case 2:
-                    list.RemoveDuplicates();
+                    l.RemoveDuplicates();
                 break;
                 case 3:
-                    list.Display();
+                    l.Display();
                 break;
                 case 4:
                     return 0;
