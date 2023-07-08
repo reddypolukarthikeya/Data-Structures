@@ -6,28 +6,29 @@ class Node {
     public:
         int data;
         Node *next;
-    //Unparameterized constructor
+    // Unparameterized constructor
     Node() {
         data = -1;
         next = nullptr;
     }
-    //Parameterized constructor
+    // Parameterized constructor
     Node (int data) {
         this->data = data;
         this->next = nullptr;
     }
 };
-
   
 class LinkedList {
+
     private:
+
         Node *head;
-        Node *tail;
+
     public:
+
         // Unparameterized constructor
         LinkedList () {
             head = nullptr;
-            tail = nullptr;
         }
         // Destructor to detroy the linked list and free memory allocated the list.
         // Default destructor only deletes head (allocated by constructor).
@@ -46,12 +47,12 @@ class LinkedList {
 };
 
 void LinkedList::Display() {
-    //Check if the list is empty.
+    // Check if the list is empty.
     if (head == nullptr) {
         std::cout << "List is empty\n";
         return;
     }
-    //If the list is not empty
+    // If the list is not empty
     Node *temp = head;
     while (temp != nullptr) {
         std::cout << temp->data << " ";
@@ -67,15 +68,15 @@ void LinkedList::InsertAtPosition (int data, int position) {
         head = newNode;
         return;
     }
-    //To insert at given position two temporary nodes are required.
+    // To insert at given position two temporary nodes are required.
     Node *temp1 = head;
     Node *temp2 = head;
-    //Traversing to the position.
+    // Traversing to the position.
     while (position) {
         temp1 = temp1->next;
         position--;    
     }
-    //Assigning the newNode at the given position.
+    // Assigning the newNode at the given position.
     temp2 = temp1->next;
     temp1->next = newNode;
     newNode->next = temp2; 
@@ -84,7 +85,7 @@ void LinkedList::InsertAtPosition (int data, int position) {
 int main() {
 
     //Object of class LinkedList.
-    LinkedList list;
+    LinkedList l;
     int temp,ch;
     //Since the position cannot be negative. Therefore, unsigned int is used.
     unsigned int position = 0;
@@ -102,10 +103,10 @@ int main() {
                     std::cin >> temp;
                     std::cout << "\nEnter the positon to insert: ";
                     std::cin >> position;
-                    list.InsertAtPosition(temp,position);
+                    l.InsertAtPosition(temp,position);
                 break;
                 case 2:
-                    list.Display();
+                    l.Display();
                 break;
                 case 3:
                     return 0;
