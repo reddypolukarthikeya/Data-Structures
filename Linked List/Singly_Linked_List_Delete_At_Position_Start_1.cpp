@@ -1,20 +1,17 @@
 #include <iostream>
 
 // Using 'nampespace std;' is considered as bad programming practice.
-using std::cin;
-using std::cout;
-using std::endl;
 
 class Node {
     public:
         int data;
         Node *next;
-    //Unparameterized constructor
+    // Unparameterized constructor
     Node() {
         data = -1;
         next = nullptr;
     }
-    //Parameterized constructor
+    // Parameterized constructor
     Node (int data) {
         this->data = data;
         this->next = nullptr;
@@ -22,15 +19,23 @@ class Node {
 };
   
 class LinkedList {
-    public:
+
+    private:
+
         Node *head;
+        Node *tail;
         int size;
-        //Constructor to initialize the linked list.
+
+    public:
+    
+
+        // Constructor to initialize the linked list.
         LinkedList() {
             head = nullptr;
+            tail = nullptr;
             size = 0;
         }
-        //Destructor to detroy the linked list and free memory allocated the list.
+        // Destructor to detroy the linked list and free memory allocated the list.
         // Default destructor only deletes head (allocated by constructor).
         // We need destructor to free the memory used by all individual nodes.
         ~LinkedList() {
@@ -40,24 +45,25 @@ class LinkedList {
                 delete temp;
                 temp = head;
             }
-            cout << endl << "List has been Destroyed...!!!";
+            std::cout << "\nList has been Destroyed...!!!";
         }
         void DeleteAtPosition(int);
         void Insert(int);
         void Display();
 };
 
-/*NOTE:- ->HERE DELETION MEANS POINTING TO THE NEXT->NEXT NODE AND NOT ACTUALLY DELETING THE NODE. 
-         ->Reasons for not using free() :
-                a.Using free() to deallocate memory allocated for an object in C++ is not recommended because it does not call the object's destructor.
-                b.When executed, a "SEGMENTATION FAULT" will occur.
-                c.free() can only be used to deallocate memory that has been allocated using "malloc()" and "calloc()".
-                d.delete is used when the memory is allocated using "new";
+/*NOTE:- 
+    ->Reasons for not using free() :
+        a.Using free() to deallocate memory allocated for an object in C++ is not recommended 
+          because it does not call the object's destructor.
+        b.When executed, a "SEGMENTATION FAULT" will occur.
+        c.free() can only be used to deallocate memory that has been allocated using "malloc()" and "calloc()".
+        d.delete is used when the memory is allocated using "new";
 */
 void LinkedList::DeleteAtPosition(int position) {
-    //if the list is empty.  
+    // If the list is empty.  
     if (position > size || position <= 0) {
-        cout << endl << "Invalid Position";
+        std::cout << "\nInvalid Position";
         return;
     }
     Node *temp = head;
@@ -79,61 +85,58 @@ void LinkedList::DeleteAtPosition(int position) {
 }
 
 void LinkedList::Insert(int data) {
-    //If the list is empty create a Node
+    // If the list is empty create a Node
     Node *newNode = new Node(data);
     if (head == nullptr) {
         head = newNode;
+        tail = newNode;
     }
     else {
-        Node *temp = head;
-        //Traverse to the end of the list
-        while(temp->next != nullptr) {
-            temp = temp->next;
-        }
-        temp->next = newNode;
+        tail->next = newNode;
+        tail = tail->next;
     }
     size++;
 }
 
 void LinkedList::Display() {
-    //Check if the list is empty.
+    // Check if the list is empty.
     if (head == nullptr) {
-        cout << "List is empty" << endl;
+        std::cout << "\nList is empty";
         return;
     }
-    //If the list is not empty
+    // If the list is not empty
     Node *temp = head;
     while (temp != nullptr) {
-        cout << temp->data << endl;
+        std::cout << temp->data << " ";
         temp = temp->next;
     }
 }
 
 int main() {
 
-    //Object of class LinkedList.
+    // Object of class LinkedList.
     LinkedList list;
     int temp,ch;
-    //Since position cannot be negative unsigned int is used.
+    // Since position cannot be negative unsigned int is used.
     unsigned int position=0;
-    //Menu driven program.
+    // Menu driven program.
     do {
-        cout << "\t\t      MENU" << endl;
-        cout << "\t\t1.Insert" << endl;
-        cout << "\t\t2.Delete at POSITION" << endl;
-        cout << "\t\t3.Display" << endl;
-        cout << "\t\t4.Exit" << endl;
-        cout << "Enter your choice: [  ]\b\b";
-        cin >> ch;
+        std::cout << "\n\t\t      MENU";
+        std::cout << "\n\t\t1.Insert";
+        std::cout << "\n\t\t2.Delete at POSITION";
+        std::cout << "\n\t\t3.Display";
+        std::cout << "\n\t\t4.Exit";
+        std::cout << "\nEnter your choice: [  ]\b\b";
+        std::cin >> ch;
         switch(ch) {
                 case 1:
-                    cout << endl << "Enter the data to insert: ";
-                    cin >> temp;
+                    std::cout << "\nEnter the data to insert: ";
+                    std::cin >> temp;
                     list.Insert(temp);
                 break;
                 case 2:
-                    cout << endl << "Enter the position to delete: ";
-                    cin >> position;
+                    std::cout << "\nEnter the position to delete: ";
+                    std::cin >> position;
                     list.DeleteAtPosition(position);
                 break;
                 case 3:
